@@ -1,0 +1,19 @@
+{
+  "name": "shipyard",
+  "version": "0.0.0",
+  "description": "A super tiny static site generator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd test && gulp"
+  },
+  "author": "Geoff Kimball <geoff@zurb.com>",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^4.4.0",
+    "handlebars": "^3.0.0",
+    "vinyl-map": "^1.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11"
+  }
+}
