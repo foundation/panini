@@ -3,6 +3,7 @@ var Handlebars = require('handlebars');
 var glob = require('glob');
 var path = require('path');
 var map = require('vinyl-map');
+var fm = require('front-matter');
 
 module.exports = function(settings) {
   var partials = glob.sync(settings.partials);
@@ -17,10 +18,11 @@ module.exports = function(settings) {
 
   // Compile pages with the above helpers
   return map(function(code, filename) {
-    var pageTemplate = Handlebars.compile(code.toString() + '\n');
+    var page = fm(code.toString());
+    var pageTemplate = Handlebars.compile(page.body + '\n');
     var layoutTemplate = Handlebars.compile(layout.toString());
 
     Handlebars.registerPartial('body', pageTemplate);
-    return layoutTemplate();
+    return layoutTemplate(page.attributes);
   });
 }

@@ -9,6 +9,7 @@
   "author": "Geoff Kimball <geoff@zurb.com>",
   "license": "MIT",
   "dependencies": {
+    "front-matter": "^0.2.1",
     "glob": "^4.4.0",
     "handlebars": "^3.0.0",
     "vinyl-map": "^1.0.1"
