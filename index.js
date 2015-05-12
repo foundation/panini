@@ -50,6 +50,10 @@ module.exports = function(settings) {
 
     pageData = extend(pageData, page.attributes);
 
+    pageData = extend(pageData, {
+      page: path.basename(file.path, '.html')
+    });
+
     Handlebars.registerPartial('body', pageTemplate);
     file.contents = new Buffer(layoutTemplate(pageData));
 
