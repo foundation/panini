@@ -12,7 +12,7 @@
     "front-matter": "^0.2.1",
     "glob": "^4.4.0",
     "handlebars": "^3.0.0",
-    "vinyl-map": "^1.0.1"
+    "through2": "^0.6.5"
   },
   "devDependencies": {
     "gulp": "^3.8.11"

@@ -2,12 +2,12 @@ var fs = require('fs');
 var Handlebars = require('handlebars');
 var glob = require('glob');
 var path = require('path');
-var map = require('vinyl-map');
+var through = require('through2');
 var fm = require('front-matter');
 
 module.exports = function(settings) {
-  var partials = glob.sync(settings.partials);
-  var layout   = fs.readFileSync(settings.layout);
+  var partials = glob.sync(settings.partials || '');
+  var layouts = path.join(process.cwd(), settings.layouts);
   
   // Find partials and register with Handlebars
   for (var i in partials) {
@@ -17,12 +17,20 @@ module.exports = function(settings) {
   }
 
   // Compile pages with the above helpers
-  return map(function(code, filename) {
-    var page = fm(code.toString());
+  return through.obj(render);
+
+  function render(file, enc, cb) {
+    var page = fm(file.contents.toString());
+    var layout = page.attributes.layout || 'default';
+    layout = fs.readFileSync(path.join(layouts, layout + '.html'));
+
     var pageTemplate = Handlebars.compile(page.body + '\n');
     var layoutTemplate = Handlebars.compile(layout.toString());
 
     Handlebars.registerPartial('body', pageTemplate);
-    return layoutTemplate(page.attributes);
-  });
+    file.contents = new Buffer(layoutTemplate(page.attributes));
+
+    cb(null, file);
+  }
 }
+
