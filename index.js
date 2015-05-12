@@ -4,16 +4,33 @@ var glob = require('glob');
 var path = require('path');
 var through = require('through2');
 var fm = require('front-matter');
+var extend = require('util')._extend;
+var yaml = require('js-yaml');
 
 module.exports = function(settings) {
-  var partials = glob.sync(settings.partials || '');
+  var partials = glob.sync(settings.partials || '!*');
   var layouts = path.join(process.cwd(), settings.layouts);
+  var dataFiles = glob.sync(settings.data || '!*');
+  var pageData = {};
   
   // Find partials and register with Handlebars
   for (var i in partials) {
     var file = fs.readFileSync(partials[i]);
     var name = path.basename(partials[i], '.html');
     Handlebars.registerPartial(name, file.toString() + '\n');
+  }
+
+  // Find data to be used as Handlebars variables
+  for (var i in dataFiles) {
+    var file = fs.readFileSync(dataFiles[i]);
+    var ext = path.extname(dataFiles[i]);
+
+    if (ext === '.json') {
+      pageData = extend(pageData, require(dataFiles[i]));
+    }
+    else if (ext === '.yml') {
+      pageData = extend(pageData, yaml.safeLoad(fs.readFileSync(dataFiles[i])));
+    }
   }
 
   // Compile pages with the above helpers
@@ -27,8 +44,10 @@ module.exports = function(settings) {
     var pageTemplate = Handlebars.compile(page.body + '\n');
     var layoutTemplate = Handlebars.compile(layout.toString());
 
+    pageData = extend(pageData, page.attributes);
+
     Handlebars.registerPartial('body', pageTemplate);
-    file.contents = new Buffer(layoutTemplate(page.attributes));
+    file.contents = new Buffer(layoutTemplate(pageData));
 
     cb(null, file);
   }

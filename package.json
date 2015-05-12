@@ -12,6 +12,7 @@
     "front-matter": "^0.2.1",
     "glob": "^4.4.0",
     "handlebars": "^3.0.0",
+    "js-yaml": "^3.3.0",
     "through2": "^0.6.5"
   },
   "devDependencies": {
