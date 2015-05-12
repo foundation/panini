@@ -24,13 +24,17 @@ module.exports = function(settings) {
   for (var i in dataFiles) {
     var file = fs.readFileSync(dataFiles[i]);
     var ext = path.extname(dataFiles[i]);
+    var name = path.basename(dataFiles[i], ext);
+    var newData = {};
 
     if (ext === '.json') {
-      pageData = extend(pageData, require(dataFiles[i]));
+      newData[name] = require(dataFiles[i])
     }
     else if (ext === '.yml') {
-      pageData = extend(pageData, yaml.safeLoad(fs.readFileSync(dataFiles[i])));
+      newData[name] = yaml.safeLoad(fs.readFileSync(dataFiles[i]));
     }
+
+    pageData = extend(pageData, newData);
   }
 
   // Compile pages with the above helpers
