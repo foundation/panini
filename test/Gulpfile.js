@@ -6,7 +6,8 @@ gulp.task('default', function() {
     .pipe(shipyard({
       layouts: 'layouts/',
       partials: 'partials/**/*.html',
-      data: 'data/**/*.{json,yml}'
+      data: 'data/**/*.{json,yml}',
+      helpers: 'helpers/**/*.js'
     }))
     .pipe(gulp.dest('_build'));
 });

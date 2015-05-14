@@ -12,12 +12,14 @@ module.exports = function(settings) {
   settings = extend({
     layouts: '',
     partials: '!*',
-    data: '!*'
+    data: '!*',
+    helpers: '!*'
   }, settings);
 
   var partials = glob.sync(settings.partials);
   var layouts = path.join(process.cwd(), settings.layouts);
   var dataFiles = glob.sync(settings.data);
+  var helpers = glob.sync(settings.helpers);
   var pageData = {};
   
   // Find partials and register with Handlebars
@@ -42,6 +44,20 @@ module.exports = function(settings) {
     }
 
     pageData = extend(pageData, newData);
+  }
+
+  // Find Handlebars helpers
+  for (var i in helpers) {
+    var helper;
+    var name = path.basename(helpers[i], '.js');
+
+    try {
+      helper = require(path.join(process.cwd(), helpers[i]));
+      Handlebars.registerPartial(name, helper);
+    }
+    catch (e) {
+      console.warn('Error when loading ' + name + '.js as a Handlebars helper.');
+    }
   }
 
   // Compile pages with the above helpers
