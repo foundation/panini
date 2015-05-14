@@ -9,7 +9,7 @@ var yaml = require('js-yaml');
 
 module.exports = function(settings) {
   var partials = glob.sync(settings.partials || '!*');
-  var layouts = path.join(process.cwd(), settings.layouts);
+  var layouts = path.join(process.cwd(), settings.layouts || '');
   var dataFiles = glob.sync(settings.data || '!*');
   var pageData = {};
   
@@ -64,4 +64,3 @@ module.exports = function(settings) {
     cb(null, file);
   }
 }
-
