@@ -8,9 +8,16 @@ var extend = require('util')._extend;
 var yaml = require('js-yaml');
 
 module.exports = function(settings) {
-  var partials = glob.sync(settings.partials || '!*');
-  var layouts = path.join(process.cwd(), settings.layouts || '');
-  var dataFiles = glob.sync(settings.data || '!*');
+  // Default options
+  settings = extend({
+    layouts: '',
+    partials: '!*',
+    data: '!*'
+  }, settings);
+
+  var partials = glob.sync(settings.partials);
+  var layouts = path.join(process.cwd(), settings.layouts);
+  var dataFiles = glob.sync(settings.data);
   var pageData = {};
   
   // Find partials and register with Handlebars
