@@ -1,9 +1,9 @@
 var gulp = require('gulp');
-var shipyard = require('../index');
+var panini = require('../index');
 
 gulp.task('default', function() {
   gulp.src('pages/**/*.html')
-    .pipe(shipyard({
+    .pipe(panini({
       layouts: 'layouts/',
       partials: 'partials/**/*.html',
       data: 'data/**/*.{json,yml}',

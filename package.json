@@ -1,7 +1,7 @@
 {
-  "name": "shipyard",
-  "version": "0.0.0",
-  "description": "A super tiny static site generator.",
+  "name": "panini",
+  "version": "0.1.0",
+  "description": "A super tiny flat file compiler.",
   "main": "index.js",
   "scripts": {
     "test": "cd test && gulp"

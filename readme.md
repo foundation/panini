@@ -1,18 +1,18 @@
-# Shipyard
+# Panini
 
 A super tiny flat file generator for use with Gulp. It compiles a series of HTML *pages* using a common *layout*. These pages can also include *partials*, or external *data* as JSON or YAML.
 
-Shipyard isn't quite a full-fledged static site generator&mdash;rather, it solves the very specific problem of assembling flat files from common elements.
+Shipyard isn't meant to be full-fledged static site generator&mdash;rather, it solves the very specific problem of assembling flat files from common elements, using a templating language.
 
 ## Usage
 
 ```js
 var gulp = require('gulp');
-var shipyard = require('shipyard');
+var panini = require('panini');
 
 gulp.task('default', function() {
   gulp.src('pages/**/*.html')
-    .pipe(shipyard({
+    .pipe(panini({
       layouts: 'layouts/',
       partials: 'partials/**/*.html'
     }))
