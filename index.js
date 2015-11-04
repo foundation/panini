@@ -53,7 +53,7 @@ module.exports = function(settings) {
 
     try {
       helper = require(path.join(process.cwd(), helpers[i]));
-      Handlebars.registerPartial(name, helper);
+      Handlebars.registerHelper(name, helper);
     }
     catch (e) {
       console.warn('Error when loading ' + name + '.js as a Handlebars helper.');
