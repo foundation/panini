@@ -72,3 +72,12 @@ handlebars.registerHelper('md', function(text) {
   return marked(text);
 });
 ```
+
+## Unit test expected template output
+Simply place or update a file in the `_expected` folder with the expected output, and with the same name as the build file .
+
+So, if you make a template that results in a `blog.html` file in the `_build` folder, 
+then make sure that there also is a `blog.html` with the expected output in the `_expected` folder.
+
+The Mocha test will then evaluate each files from the `_expected` folder, with each files with same name in the `_build` folders, 
+and assert the content after both files is minified and striped for whitespace. 
