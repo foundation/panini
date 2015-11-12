@@ -52,7 +52,7 @@ module.exports = function(settings) {
   // Find partials and register with Handlebars
   for (var i in partials) {
     var file = fs.readFileSync(partials[i]);
-    var name = path.basename(partials[i], settings.templateExt);
+    var name = path.basename(partials[i], partialExt);
     Handlebars.registerPartial(name, file.toString() + '\n');
   }
 
@@ -97,7 +97,6 @@ module.exports = function(settings) {
 
     // check file extension from src stream
     checkExt([fileExt]);
-    
     // Get the HTML for the current page and layout
     var page = fm(file.contents.toString());
     var layout = page.attributes.layout || 'default';

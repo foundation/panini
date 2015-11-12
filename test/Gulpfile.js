@@ -18,8 +18,7 @@ gulp.task('hbs', function() {
       layouts: 'layouts/*.hbs',
       partials: 'partials/**/*.hbs',
       data: 'data/**/*.{json,yml}',
-      helpers: 'helpers/**/*.js',
-      templateExt : '.hbs'
+      helpers: 'helpers/**/*.js'
     }))
     .pipe(gulp.dest('_build'));
 });
