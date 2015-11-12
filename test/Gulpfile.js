@@ -11,3 +11,15 @@ gulp.task('default', function() {
     }))
     .pipe(gulp.dest('_build'));
 });
+
+gulp.task('hbs', function() {
+  gulp.src('pages/**/*.hbs')
+    .pipe(panini({
+      layouts: 'layouts/*.hbs',
+      partials: 'partials/**/*.hbs',
+      data: 'data/**/*.{json,yml}',
+      helpers: 'helpers/**/*.js',
+      templateExt : '.hbs'
+    }))
+    .pipe(gulp.dest('_build'));
+});

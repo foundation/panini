@@ -4,7 +4,7 @@
   "description": "A super tiny flat file compiler.",
   "main": "index.js",
   "scripts": {
-    "test": "cd test && gulp"
+    "test": "cd test && gulp hbs"
   },
   "author": "Geoff Kimball <geoff@zurb.com>",
   "license": "MIT",
