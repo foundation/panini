@@ -23,7 +23,7 @@ module.exports = function(settings) {
   var pageData = {};
 
   // supported file extensions
-  var extensions = ['.html', 'hb', '.hbs', '.handlebars'];
+  var extensions = ['.html', '.hb', '.hbs', '.handlebars'];
   // get extensions used in settings
   var layoutExt = path.extname(settings.layouts);
   var partialExt = path.extname(settings.partials);

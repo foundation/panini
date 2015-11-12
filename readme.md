@@ -22,7 +22,7 @@ gulp.task('default', function() {
     .pipe(gulp.dest('_build'));
 });
 
-// Use handlebars extensions ('hb', '.hbs', '.handlebars')
+// Use handlebars extensions ('.hb', '.hbs', '.handlebars')
 gulp.task('hbs', function() {
   gulp.src('pages/**/*.hbs')
     .pipe(panini({
