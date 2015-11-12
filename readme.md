@@ -2,21 +2,36 @@
 
 A super tiny flat file generator for use with Gulp. It compiles a series of HTML *pages* using a common *layout*. These pages can also include *partials*, or external *data* as JSON or YAML.
 
-Shipyard isn't meant to be full-fledged static site generator&mdash;rather, it solves the very specific problem of assembling flat files from common elements, using a templating language.
+Panini isn't meant to be full-fledged static site generator&mdash;rather, it solves the very specific problem of assembling flat files from common elements, using a templating language.
 
 ## Usage
 
-```js
+```javascript
 var gulp = require('gulp');
 var panini = require('panini');
 
+// Use .html extensions
 gulp.task('default', function() {
   gulp.src('pages/**/*.html')
     .pipe(panini({
-      layouts: 'layouts/',
-      partials: 'partials/**/*.html'
+      layouts: 'layouts/*.html',
+      partials: 'partials/**/*.html',
+      data: 'data/**/*.{json,yml}',
+      helpers: 'helpers/**/*.js'
     }))
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('_build'));
+});
+
+// Use handlebars extensions ('hb', '.hbs', '.handlebars')
+gulp.task('hbs', function() {
+  gulp.src('pages/**/*.hbs')
+    .pipe(panini({
+      layouts: 'layouts/*.hbs',
+      partials: 'partials/**/*.hbs',
+      data: 'data/**/*.{json,yml}',
+      helpers: 'helpers/**/*.js'
+    }))
+    .pipe(gulp.dest('_build'));
 });
 ```
 
@@ -72,3 +87,16 @@ handlebars.registerHelper('md', function(text) {
   return marked(text);
 });
 ```
+
+## Test expected template output
+Simply place or update a file in the `_expected` folder with the expected output, and with the same name as the build file .
+
+So, if you make a template that results in a `blog.html` file in the `_build` folder, 
+then make sure that there also is a `blog.html` with the expected output in the `_expected` folder.
+
+The Mocha test will then evaluate each files from the `_expected` folder, with each files with same name in the `_build` folders, 
+and assert the content after both files is minified and striped for whitespace. 
+
+### using handlebars extensions
+The main test come pre-configured with use of both `.html` and `.hbs` extensions. 
+If tests is to be performed only with one of those extensions, or with other types of handlebars extensions, then the tasks in `Gulpfile.js` has to be configured. 
