@@ -10,7 +10,7 @@ var yaml = require('js-yaml');
 module.exports = function(settings) {
   // Default options
   settings = extend({
-    layouts: '',
+    layouts: '!*',
     partials: '!*',
     data: '!*',
     helpers: '!*'
@@ -35,13 +35,22 @@ module.exports = function(settings) {
 
   // Helper to check array of used extension, throw error if not supported
   var checkExt = function (extArr) {
-    // if the given extension is not one of the supported
     for (var ext in extArr) {
+      // if the given extension is not one of the supported
       if (! isSupportedExt(extArr[ext])) {
-        // throw it back!
-        throw new Error(
-          'File extension '+ extArr[ext] +' is not supported in panini'
-        );
+        // if no extension is given
+        if (extArr[ext] === '') {
+          // make sure users know they have to specify a glob
+          throw new Error(
+            'You have to specify a glob pattern with file extension for both ' +
+            '"layouts", "partials", and "pages" in panini'
+          )
+        } else  {
+          // if wrong ext inform that it's not supported
+          throw new Error(
+            'File extension '+ extArr[ext] +' is not supported in panini'
+          );
+        }
       }
     }
   };
