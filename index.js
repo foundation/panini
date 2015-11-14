@@ -1,6 +1,11 @@
 var through = require('through2');
 var panini;
 
+/**
+ * Initializes an instance of Panini.
+ * @constructor
+ * @param {object} options - Configuration options to use.
+ */
 function Panini(options) {
   this.options = options;
   this.Handlebars = require('handlebars');
@@ -24,9 +29,14 @@ Panini.prototype.loadBuiltinHelpers = require('./lib/loadBuiltinHelpers');
 Panini.prototype.loadData = require('./lib/loadData');
 Panini.prototype.render = require('./lib/render');
 
-module.exports = function(settings) {
+/**
+ * Gulp stream function that renders HTML pages. The first time the function is invoked in the stream, a new instance of Panini is created with the given options.
+ * @param {object} options - Configuration options to pass to the new Panini instance.
+ * @returns {function} Transform stream function that renders HTML pages.
+ */
+module.exports = function(options) {
   if (!panini) {
-    panini = new Panini(settings);
+    panini = new Panini(options);
     panini.init();
   }
 
