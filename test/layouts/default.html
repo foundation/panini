@@ -7,6 +7,14 @@
   <body>
     {{> header}}
 
+    {{#ifpage 'index'}}
+    <h1>This is the Index!</h1>
+    {{/ifpage}}
+
+    {{#unlesspage 'index'}}
+    <h1>This is not the Index!</h1>
+    {{/unlesspage}}
+
     {{> body}}
 
     {{> footer}}
