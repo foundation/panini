@@ -13,6 +13,7 @@
     "glob": "^4.4.0",
     "handlebars": "^3.0.0",
     "js-yaml": "^3.3.0",
+    "marked": "^0.3.5",
     "through2": "^0.6.5"
   },
   "devDependencies": {

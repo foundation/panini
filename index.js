@@ -20,6 +20,7 @@ Panini.prototype.init = require('./lib/init');
 Panini.prototype.loadLayouts = require('./lib/loadLayouts');
 Panini.prototype.loadPartials = require('./lib/loadPartials');
 Panini.prototype.loadHelpers = require('./lib/loadHelpers');
+Panini.prototype.loadBuiltinHelpers = require('./lib/loadBuiltinHelpers');
 Panini.prototype.loadData = require('./lib/loadData');
 Panini.prototype.render = require('./lib/render');
 
