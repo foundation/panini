@@ -1,10 +1,18 @@
 # Panini
 
-A super tiny flat file generator for use with Gulp. It compiles a series of HTML *pages* using a common *layout*. These pages can also include *partials*, or external *data* as JSON or YAML.
+A super simple flat file generator for use with Gulp. It compiles a series of HTML **pages** using a common **layout**. These pages can also include HTML **partials**, external Handlebars **helpers**, or external **data** as JSON or YAML.
 
-Shipyard isn't meant to be full-fledged static site generator&mdash;rather, it solves the very specific problem of assembling flat files from common elements, using a templating language.
+Panini isn't a full-fledged static site generator&mdash;rather, it solves the very specific problem of assembling flat files from common elements, using a templating language.
+
+## Installation
+
+```bash
+npm install panini --save-dev
+```
 
 ## Usage
+
+Feed Panini a stream of HTML files, and get a delicious flattened site out the other end.
 
 ```js
 var gulp = require('gulp');
@@ -24,6 +32,10 @@ gulp.task('default', function() {
 ```
 
 ## Options
+
+### `pages`
+
+A string containing the root folder all pages live in. This option does not pull in the files themselves for processing&mdash;that's what `gulp.src()` is for. This setting tells Panini what the common root of your site's pages is.
 
 ### `layouts`
 
