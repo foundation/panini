@@ -33,13 +33,17 @@ gulp.task('default', function() {
 
 ## Options
 
-### `pages`
+### `root`
 
-A string containing the root folder all pages live in. This option does not pull in the files themselves for processing&mdash;that's what `gulp.src()` is for. This setting tells Panini what the common root of your site's pages is.
+**Type:** `String`
+
+Path to the root folder all pages live in. This option does not pull in the files themselves for processing&mdash;that's what `gulp.src()` is for. This setting tells Panini what the common root of your site's pages is.
 
 ### `layouts`
 
-A string containing the path to a directory containing layouts. Layout files can have the extension `.html`, `.hbs`, or `.handlebars`. One layout must be named `default`. To use a layout other than the default on a specific page, override it in the Front Matter on that page.
+**Type:** `String`
+
+Path to a folder containing layouts. Layout files can have the extension `.html`, `.hbs`, or `.handlebars`. One layout must be named `default`. To use a layout other than the default on a specific page, override it in the Front Matter on that page.
 
 ```html
 ---
@@ -59,24 +63,20 @@ All layouts have a special Handlebars partial called `body` which contains the c
 
 ### `partials`
 
-A string containing a path to a directory containing HTML partials. Partial files can have the extension `.html`, `.hbs`, or `.handlebars`. Each will be registered as a Handlebars partial which can be accessed using the name of the file. (The path to the file doesn't matter&mdash;only the name of the file itself is used.)
+**Type:** `String`
+
+Path to a folder containing HTML partials. Partial files can have the extension `.html`, `.hbs`, or `.handlebars`. Each will be registered as a Handlebars partial which can be accessed using the name of the file. (The path to the file doesn't matter&mdash;only the name of the file itself is used.)
 
 ```html
 <!-- Renders partials/header.html -->
 {{> header}}
 ```
 
-### `data`
-
-A string containing a path to a directory containing external data, which will be passed in to every page. Data can be formatted as JSON (`.json`) or YAML (`.yml`). Within a template, the data is stored within a variable with the same name as the file it came from.
-
-Data can also be inserted into the page itself with a Front Matter template at the top of the file.
-
-Lastly, the reserved `page` variable is added to every page template as it renders. It contains the name of the page being rendered, without the extension.
-
 ### `helpers`
 
-A string containing a path to a directory containing Handlebars helpers. Handlebars helpers are `.js` files which export a function via `module.exports`. The name used to register the helper is the same as the name of the file.
+**Type:** `String`
+
+Path to a folder containing Handlebars helpers. Handlebars helpers are `.js` files which export a function via `module.exports`. The name used to register the helper is the same as the name of the file.
 
 For example, a file named `markdown.js` that exports this function would add a Handlebars helper called `{{markdown}}`.
 
@@ -87,3 +87,13 @@ module.exports = function(text) {
   return marked(text);
 }
 ```
+
+### `data`
+
+**Type:** `String`
+
+Path to a folder containing external data, which will be passed in to every page. Data can be formatted as JSON (`.json`) or YAML (`.yml`). Within a template, the data is stored within a variable with the same name as the file it came from.
+
+Data can also be inserted into the page itself with a Front Matter template at the top of the file.
+
+Lastly, the reserved `page` variable is added to every page template as it renders. It contains the name of the page being rendered, without the extension.
