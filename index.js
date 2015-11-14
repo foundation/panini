@@ -33,3 +33,5 @@ module.exports = function(settings) {
   // Compile pages with the above helpers
   return through.obj(panini.render.bind(panini));
 }
+
+module.exports.Panini = Panini;
