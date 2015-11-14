@@ -4,7 +4,7 @@
   "description": "A super tiny flat file compiler.",
   "main": "index.js",
   "scripts": {
-    "test": "cd test && gulp"
+    "test": "mocha"
   },
   "author": "Geoff Kimball <geoff@zurb.com>",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "through2": "^0.6.5"
   },
   "devDependencies": {
-    "gulp": "^3.8.11"
+    "gulp": "^3.8.11",
+    "mocha": "^2.3.3"
   }
 }
