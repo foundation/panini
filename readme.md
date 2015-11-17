@@ -31,6 +31,12 @@ gulp.task('default', function() {
 });
 ```
 
+Note that Panini loads layouts, partials, helpers, and data files once on first run. Whenever these files change, call `panini.refresh()` to get it up to date. You can easily do this inside a call to `gulp.watch()`:
+
+```js
+gulp.watch(['./src/{layouts,partials,helpers,data}/**/*'], [panini.refresh]);
+```
+
 ## Options
 
 ### `root`
