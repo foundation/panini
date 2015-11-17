@@ -21,7 +21,7 @@ function Panini(options) {
   }
 }
 
-Panini.prototype.init = require('./lib/init');
+Panini.prototype.refresh = require('./lib/refresh');
 Panini.prototype.loadLayouts = require('./lib/loadLayouts');
 Panini.prototype.loadPartials = require('./lib/loadPartials');
 Panini.prototype.loadHelpers = require('./lib/loadHelpers');
@@ -37,7 +37,9 @@ Panini.prototype.render = require('./lib/render');
 module.exports = function(options) {
   if (!panini) {
     panini = new Panini(options);
-    panini.init();
+    panini.loadBuiltinHelpers();
+    panini.refresh();
+    module.exports.refresh = panini.refresh.bind(panini);
   }
 
   // Compile pages with the above helpers
