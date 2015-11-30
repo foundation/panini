@@ -12,6 +12,12 @@ title: Home
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error delectus ut placeat reiciendis neque libero quam ducimus beatae possimus, nobis. Laboriosam quo minima, porro fuga neque omnis incidunt consectetur natus?
 {{/markdown}}
 
+{{#ifequal layout 'notdefault'}}
+  <p>This is not the default layout!</p>
+{{else}}
+  <p>This is the default layout!</p>
+{{/ifequal}}
+
 <ul>
   {{#repeat 5}}
   <li>Item!</li>
