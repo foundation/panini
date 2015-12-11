@@ -47,3 +47,4 @@ module.exports = function(options) {
 }
 
 module.exports.Panini = Panini;
+module.exports.refresh = function() {}
