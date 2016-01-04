@@ -20,5 +20,12 @@
   "devDependencies": {
     "gulp": "^3.8.11",
     "mocha": "^2.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zurb/panini"
+  },
+  "bugs": {
+    "url": "https://github.com/zurb/panini/issues"
   }
 }
