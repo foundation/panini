@@ -1,17 +1,24 @@
-var gulp = require('gulp');
-var panini = require('../index');
+import { src, dest } from 'vinyl-fs';
+import panini from '../index';
+import assert from 'assert';
+import equal from 'assert-dir-equal';
+
+const FIXTURES = 'test/fixtures/';
 
 describe('Panini', function() {
-  it('creates a series of flat HTML files from a set of pages and layouts', function(done) {
-    gulp.src('test/fixtures/pages/**/*.html')
+  it('builds a page with a default layout', function(done) {
+    src(FIXTURES + 'basic/pages/*')
       .pipe(panini({
-        root: 'test/fixtures/pages/',
-        layouts: 'test/fixtures/layouts/',
-        partials: 'test/fixtures/partials/',
-        data: 'test/fixtures/data/',
-        helpers: 'test/fixtures/helpers/'
+        root: FIXTURES + 'basic/pages/',
+        layouts: FIXTURES + 'basic/layouts'
       }))
-      .pipe(gulp.dest('test/_build'))
-      .on('end', done); 
+      .pipe(dest(FIXTURES + 'basic/build'))
+      .on('data', data => {
+        console.log(data);
+      })
+      .on('end', () => {
+        equal(FIXTURES + 'basic/expected', FIXTURES + 'basic/build');
+        done();
+      });
   });
 });
