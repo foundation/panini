@@ -5,8 +5,8 @@ import { Panini } from '..';
 
 const FIXTURES = 'test/fixtures/';
 
-describe('Panini', function() {
-  it('builds a page with a default layout', function(done) {
+describe('Panini', () => {
+  it('builds a page with a default layout', done => {
     var p = new Panini({
       root: FIXTURES + 'basic/pages/',
       layouts: FIXTURES + 'basic/layouts'
@@ -23,7 +23,7 @@ describe('Panini', function() {
       });
   });
 
-  it('builds a page with a custom layout', function(done) {
+  it('builds a page with a custom layout', done => {
     var p = new Panini({
       root: FIXTURES + 'layouts/pages/',
       layouts: FIXTURES + 'layouts/layouts/'
@@ -40,7 +40,7 @@ describe('Panini', function() {
       });
   });
 
-  it('builds a page with custom partials', function(done) {
+  it('builds a page with custom partials', done => {
     var p = new Panini({
       root: FIXTURES + 'partials/pages/',
       layouts: FIXTURES + 'partials/layouts/',
@@ -58,7 +58,7 @@ describe('Panini', function() {
       });
   });
 
-  it('builds a page with custom data', function(done) {
+  it('builds a page with custom data', done => {
     var p = new Panini({
       root: FIXTURES + 'data-page/pages/',
       layouts: FIXTURES + 'data-page/layouts/',
@@ -76,7 +76,7 @@ describe('Panini', function() {
       });
   });
 
-  it('builds a page with custom helpers', function(done) {
+  it('builds a page with custom helpers', done => {
     var p = new Panini({
       root: FIXTURES + 'helpers/pages/',
       layouts: FIXTURES + 'helpers/layouts/',
@@ -94,7 +94,7 @@ describe('Panini', function() {
       });
   });
 
-  it('builds a page with external JSON data', function(done) {
+  it('builds a page with external JSON data', done => {
     var p = new Panini({
       root: FIXTURES + 'data-json/pages/',
       layouts: FIXTURES + 'data-json/layouts/',
@@ -112,7 +112,7 @@ describe('Panini', function() {
       });
   });
 
-  it('builds a page with external YAML data', function(done) {
+  it('builds a page with external YAML data', done => {
     var p = new Panini({
       root: FIXTURES + 'data-yaml/pages/',
       layouts: FIXTURES + 'data-yaml/layouts/',
@@ -131,8 +131,8 @@ describe('Panini', function() {
   });
 });
 
-describe('Panini variables', function() {
-  it('{{page}} variable that stores the current page', function(done) {
+describe('Panini variables', () => {
+  it('{{page}} variable that stores the current page', done => {
     var p = new Panini({
       root: FIXTURES + 'variable-page/pages/',
       layouts: FIXTURES + 'variable-page/layouts/',
@@ -149,7 +149,7 @@ describe('Panini variables', function() {
       });
   });
 
-  it('{{layout}} variable that stores the current layout', function(done) {
+  it('{{layout}} variable that stores the current layout', done => {
     var p = new Panini({
       root: FIXTURES + 'variable-layout/pages/',
       layouts: FIXTURES + 'variable-layout/layouts/',
@@ -166,7 +166,7 @@ describe('Panini variables', function() {
       });
   });
 
-  it('{{root}} variable that stores a relative path to the root folder', function(done) {
+  it('{{root}} variable that stores a relative path to the root folder', done => {
     var p = new Panini({
       root: FIXTURES + 'variable-root/pages/',
       layouts: FIXTURES + 'variable-root/layouts/',
@@ -184,8 +184,8 @@ describe('Panini variables', function() {
   });
 });
 
-describe('Panini helpers', function() {
-  it('#code helper that renders code blocks', function(done) {
+describe('Panini helpers', () => {
+  it('#code helper that renders code blocks', done => {
     var p = new Panini({
       root: FIXTURES + 'helper-code/pages/',
       layouts: FIXTURES + 'helper-code/layouts/',
@@ -203,7 +203,7 @@ describe('Panini helpers', function() {
       });
   });
 
-  it('#ifEqual helper that compares two values', function(done) {
+  it('#ifEqual helper that compares two values', done => {
     var p = new Panini({
       root: FIXTURES + 'helper-ifequal/pages/',
       layouts: FIXTURES + 'helper-ifequal/layouts/',
@@ -221,7 +221,7 @@ describe('Panini helpers', function() {
       });
   });
 
-  it('#ifpage helper that checks the current page', function(done) {
+  it('#ifpage helper that checks the current page', done => {
     var p = new Panini({
       root: FIXTURES + 'helper-ifpage/pages/',
       layouts: FIXTURES + 'helper-ifpage/layouts/',
@@ -239,7 +239,7 @@ describe('Panini helpers', function() {
       });
   });
 
-  it('#markdown helper that converts Markdown to HTML', function(done) {
+  it('#markdown helper that converts Markdown to HTML', done => {
     var p = new Panini({
       root: FIXTURES + 'helper-markdown/pages/',
       layouts: FIXTURES + 'helper-markdown/layouts/',
@@ -257,7 +257,7 @@ describe('Panini helpers', function() {
       });
   });
 
-  it('#repeat helper that prints content multiple times', function(done) {
+  it('#repeat helper that prints content multiple times', done => {
     var p = new Panini({
       root: FIXTURES + 'helper-repeat/pages/',
       layouts: FIXTURES + 'helper-repeat/layouts/',
@@ -275,7 +275,7 @@ describe('Panini helpers', function() {
       });
   });
 
-  it('#unlesspage helper that checks the current page', function(done) {
+  it('#unlesspage helper that checks the current page', done => {
     var p = new Panini({
       root: FIXTURES + 'helper-unlesspage/pages/',
       layouts: FIXTURES + 'helper-unlesspage/layouts/',
