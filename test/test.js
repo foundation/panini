@@ -40,6 +40,10 @@ describe('Panini', function() {
       });
   });
 
+  xit('builds a page with custom partials', function(done) {
+
+  });
+
   it('builds a page with custom data', function(done) {
     var p = new Panini({
       root: FIXTURES + 'data/pages/',
@@ -56,5 +60,53 @@ describe('Panini', function() {
         equal(FIXTURES + 'data/expected', FIXTURES + 'data/build');
         done();
       });
+  });
+
+  xit('builds a page with custom helpers', function(done) {
+
+  });
+
+  xit('builds a page with external data', function(done) {
+
+  });
+});
+
+describe('Panini variables', function() {
+  xit('{{page}} variable that stores the current page', function(done) {
+
+  });
+
+  xit('{{layout}} variable that stores the current layout', function(done) {
+    
+  });
+
+  xit('{{root}} variable that stores a relative path to the root folder', function(done) {
+    
+  });
+});
+
+describe('Panini helpers', function() {
+  xit('#code helper that renders code blocks', function(done) {
+
+  });
+
+  xit('#ifEqual helper that compares two values', function(done) {
+
+  });
+
+  xit('#ifPage helper that checks the current page', function(done) {
+
+  });
+
+  xit('#markdown helper that converts Markdown to HTML', function(done) {
+
+  });
+
+  xit('#repeat helper that prints content multiple times', function(done) {
+
+  });
+
+  xit('#unlessPage helper that checks the current page', function(done) {
+
   });
 });
