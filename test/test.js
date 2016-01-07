@@ -39,4 +39,22 @@ describe('Panini', function() {
         done();
       });
   });
+
+  it('builds a page with custom data', function(done) {
+    var p = new Panini({
+      root: FIXTURES + 'data/pages/',
+      layouts: FIXTURES + 'data/layouts/',
+      partials: FIXTURES + 'data/partials/'
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'data/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'data/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'data/expected', FIXTURES + 'data/build');
+        done();
+      });
+  });
 });
