@@ -40,34 +40,94 @@ describe('Panini', function() {
       });
   });
 
-  xit('builds a page with custom partials', function(done) {
-
-  });
-
-  it('builds a page with custom data', function(done) {
+  it('builds a page with custom partials', function(done) {
     var p = new Panini({
-      root: FIXTURES + 'data/pages/',
-      layouts: FIXTURES + 'data/layouts/',
-      partials: FIXTURES + 'data/partials/'
+      root: FIXTURES + 'partials/pages/',
+      layouts: FIXTURES + 'partials/layouts/',
+      partials: FIXTURES + 'partials/partials/'
     });
 
     p.refresh();
 
-    src(FIXTURES + 'data/pages/*')
+    src(FIXTURES + 'partials/pages/*')
       .pipe(p.render())
-      .pipe(dest(FIXTURES + 'data/build'))
+      .pipe(dest(FIXTURES + 'partials/build'))
       .on('finish', () => {
-        equal(FIXTURES + 'data/expected', FIXTURES + 'data/build');
+        equal(FIXTURES + 'partials/expected', FIXTURES + 'partials/build');
         done();
       });
   });
 
-  xit('builds a page with custom helpers', function(done) {
+  it('builds a page with custom data', function(done) {
+    var p = new Panini({
+      root: FIXTURES + 'data-page/pages/',
+      layouts: FIXTURES + 'data-page/layouts/',
+      partials: FIXTURES + 'data-page/partials/'
+    });
 
+    p.refresh();
+
+    src(FIXTURES + 'data-page/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'data-page/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'data-page/expected', FIXTURES + 'data-page/build');
+        done();
+      });
   });
 
-  xit('builds a page with external data', function(done) {
+  it('builds a page with custom helpers', function(done) {
+    var p = new Panini({
+      root: FIXTURES + 'helpers/pages/',
+      layouts: FIXTURES + 'helpers/layouts/',
+      helpers: FIXTURES + 'helpers/helpers/'
+    });
 
+    p.refresh();
+
+    src(FIXTURES + 'helpers/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'helpers/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'helpers/expected', FIXTURES + 'helpers/build');
+        done();
+      });
+  });
+
+  it('builds a page with external JSON data', function(done) {
+    var p = new Panini({
+      root: FIXTURES + 'data-json/pages/',
+      layouts: FIXTURES + 'data-json/layouts/',
+      data: FIXTURES + 'data-json/data/'
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'data-json/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'data-json/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'data-json/expected', FIXTURES + 'data-json/build');
+        done();
+      });
+  });
+
+  it('builds a page with external YAML data', function(done) {
+    var p = new Panini({
+      root: FIXTURES + 'data-yaml/pages/',
+      layouts: FIXTURES + 'data-yaml/layouts/',
+      data: FIXTURES + 'data-yaml/data/'
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'data-yaml/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'data-yaml/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'data-yaml/expected', FIXTURES + 'data-yaml/build');
+        done();
+      });
   });
 });
 
