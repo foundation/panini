@@ -4,7 +4,7 @@
   "description": "A super tiny flat file compiler.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --compilers js:babel-register --reporter nyan"
   },
   "author": "Geoff Kimball <geoff@zurb.com>",
   "license": "MIT",
