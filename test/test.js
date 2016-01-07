@@ -132,16 +132,55 @@ describe('Panini', function() {
 });
 
 describe('Panini variables', function() {
-  xit('{{page}} variable that stores the current page', function(done) {
+  it('{{page}} variable that stores the current page', function(done) {
+    var p = new Panini({
+      root: FIXTURES + 'variable-page/pages/',
+      layouts: FIXTURES + 'variable-page/layouts/',
+    });
 
+    p.refresh();
+
+    src(FIXTURES + 'variable-page/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'variable-page/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'variable-page/expected', FIXTURES + 'variable-page/build');
+        done();
+      });
   });
 
-  xit('{{layout}} variable that stores the current layout', function(done) {
-    
+  it('{{layout}} variable that stores the current layout', function(done) {
+    var p = new Panini({
+      root: FIXTURES + 'variable-layout/pages/',
+      layouts: FIXTURES + 'variable-layout/layouts/',
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'variable-layout/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'variable-layout/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'variable-layout/expected', FIXTURES + 'variable-layout/build');
+        done();
+      });
   });
 
-  xit('{{root}} variable that stores a relative path to the root folder', function(done) {
-    
+  it('{{root}} variable that stores a relative path to the root folder', function(done) {
+    var p = new Panini({
+      root: FIXTURES + 'variable-root/pages/',
+      layouts: FIXTURES + 'variable-root/layouts/',
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'variable-root/pages/**/*.html')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'variable-root/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'variable-root/expected', FIXTURES + 'variable-root/build');
+        done();
+      });
   });
 });
 
