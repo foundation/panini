@@ -43,7 +43,7 @@ module.exports = function(options) {
   }
 
   // Compile pages with the above helpers
-  return through.obj(panini.render.bind(panini));
+  return panini.render();
 }
 
 module.exports.Panini = Panini;
