@@ -112,6 +112,24 @@ describe('Panini', () => {
       });
   });
 
+  it('builds a page with an array of external JSON data', done => {
+    var p = new Panini({
+      root: FIXTURES + 'data-array/pages/',
+      layouts: FIXTURES + 'data-array/layouts/',
+      data: [FIXTURES + 'data-array/data/', FIXTURES + 'data-array/data-extra/']
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'data-array/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'data-array/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'data-array/expected', FIXTURES + 'data-array/build');
+        done();
+      });
+  });  
+
   it('builds a page with external YAML data', done => {
     var p = new Panini({
       root: FIXTURES + 'data-yaml/pages/',
