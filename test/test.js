@@ -128,7 +128,7 @@ describe('Panini', () => {
         equal(FIXTURES + 'data-array/expected', FIXTURES + 'data-array/build');
         done();
       });
-  });  
+  });
 
   it('builds a page with external YAML data', done => {
     var p = new Panini({
@@ -188,6 +188,7 @@ describe('Panini variables', () => {
     var p = new Panini({
       root: FIXTURES + 'variable-root/pages/',
       layouts: FIXTURES + 'variable-root/layouts/',
+      partials: FIXTURES + 'variable-root/partials/'
     });
 
     p.refresh();
