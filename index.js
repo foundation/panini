@@ -1,4 +1,5 @@
 var through = require('through2');
+var extend = require('deepmerge');
 var panini;
 
 /**
@@ -7,8 +8,16 @@ var panini;
  * @param {object} options - Configuration options to use.
  */
 function Panini(options) {
-  this.options = options;
+  // Config settings
+  this.options = extend({
+    pageLayouts: {},
+    transform: {}
+  }, options);
+  
+  // Internal Handlebars instance
   this.Handlebars = require('handlebars');
+  
+  // Cache of Handlebars templates and data objects
   this.layouts = {};
   this.data = {};
 
