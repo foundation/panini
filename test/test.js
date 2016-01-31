@@ -40,6 +40,26 @@ describe('Panini', () => {
       });
   });
 
+  it('builds a page with preset layouts by folder', done => {
+    var p = new Panini({
+      root: FIXTURES + 'page-layouts/pages/',
+      layouts: FIXTURES + 'page-layouts/layouts/',
+      pageLayouts: {
+        'alternate': 'alternate'
+      }
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'page-layouts/pages/**/*.html')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'page-layouts/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'page-layouts/expected', FIXTURES + 'page-layouts/build');
+        done();
+      });
+  });
+
   it('builds a page with custom partials', done => {
     var p = new Panini({
       root: FIXTURES + 'partials/pages/',
