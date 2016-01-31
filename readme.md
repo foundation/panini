@@ -69,6 +69,23 @@ All layouts have a special Handlebars partial called `body` which contains the c
 <!-- Footer down here -->
 ```
 
+### `pageLayouts`
+
+**Type:** `Object`
+
+A list of presets for page layouts, grouped by folder. This allows you to automatically set all pages within a certain folder to have the same layout.
+
+```js
+panini({
+  root: 'src/pages/',
+  layouts: 'src/layouts/',
+  pageLayouts: {
+    // All pages inside src/pages/blog will use the blog.html layout
+    'blog': 'blog'
+  }
+})
+```
+
 ### `partials`
 
 **Type:** `String`
