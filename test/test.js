@@ -2,6 +2,7 @@ import { src, dest } from 'vinyl-fs';
 import assert from 'assert';
 import equal from 'assert-dir-equal';
 import { Panini } from '..';
+import markdown from 'gulp-markdown';
 
 const FIXTURES = 'test/fixtures/';
 
@@ -164,6 +165,29 @@ describe('Panini', () => {
       .pipe(dest(FIXTURES + 'data-yaml/build'))
       .on('finish', () => {
         equal(FIXTURES + 'data-yaml/expected', FIXTURES + 'data-yaml/build');
+        done();
+      });
+  });
+
+  it('transforms files with other Gulp plugins', done => {
+    var p = new Panini({
+      root: FIXTURES + 'transform/pages/',
+      layouts: FIXTURES + 'transform/layouts/',
+      transform: {
+        '**/*.md': function() {
+          return this
+            .pipe(markdown());
+        }
+      }
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'transform/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'transform/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'transform/expected', FIXTURES + 'transform/build');
         done();
       });
   });
