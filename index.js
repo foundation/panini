@@ -1,4 +1,3 @@
-var through = require('through2');
 var panini;
 
 /**
