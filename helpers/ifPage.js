@@ -9,7 +9,7 @@ module.exports = function(pageName) {
    * @param {string...} pages - One or more pages to check.
    * @param (object) options - Handlebars object.
    * @example
-   * {{#ifpage 'index', 'about'}}This must be the index or about page.{{/ifpage}}
+   * {{#ifpage 'index' 'about'}}This must be the index or about page.{{/ifpage}}
    * @return The content inside the helper if a page matches, or an empty string if not.
    */
   return function() {
