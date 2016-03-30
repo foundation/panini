@@ -150,6 +150,24 @@ describe('Panini', () => {
       });
   });
 
+  it('builds a page with external JS data', done => {
+    var p = new Panini({
+      root: FIXTURES + 'data-js/pages/',
+      layouts: FIXTURES + 'data-js/layouts/',
+      data: FIXTURES + 'data-js/data/'
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'data-js/pages/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'data-js/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'data-js/expected', FIXTURES + 'data-js/build');
+        done();
+      });
+  });
+
   it('builds a page with external YAML data', done => {
     var p = new Panini({
       root: FIXTURES + 'data-yaml/pages/',
