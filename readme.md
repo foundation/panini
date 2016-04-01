@@ -119,6 +119,8 @@ module.exports = function(text) {
 
 Path to a folder containing external data, which will be passed in to every page. Data can be formatted as JSON (`.json`) or YAML (`.yml`). Within a template, the data is stored within a variable with the same name as the file it came from.
 
+Data can also be a `.js` file with a `module.exports`. The data returned by the export function will be used.
+
 Data can also be inserted into the page itself with a Front Matter template at the top of the file.
 
 Lastly, the reserved `page` variable is added to every page template as it renders. It contains the name of the page being rendered, without the extension.
