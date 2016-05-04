@@ -23,7 +23,7 @@ var panini = require('panini');
 gulp.task('default', function() {
   gulp.src('pages/**/*.html')
     .pipe(panini({
-      root: 'pages/'
+      root: 'pages/',
       layouts: 'layouts/',
       partials: 'partials/',
       helpers: 'helpers/',
