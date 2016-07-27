@@ -185,6 +185,25 @@ describe('Panini', () => {
         done();
       });
   });
+
+  it('builds scss with external JSON data', done => {
+    var p = new Panini({
+      root: FIXTURES + 'scss/pages/',
+      layouts: FIXTURES + 'scss/layouts/',
+      data: FIXTURES + 'scss/data/'
+    });
+
+  p.refresh();
+
+  src(FIXTURES + 'scss/assets/*')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'scss/build'))
+      .on('finish', () => {
+    equal(FIXTURES + 'scss/expected', FIXTURES + 'scss/build');
+  done();
+  });
+});
+
 });
 
 describe('Panini variables', () => {
