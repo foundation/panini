@@ -1,4 +1,5 @@
 var panini;
+var help = require('./lib/helpMessage');
 
 /**
  * Initializes an instance of Panini.
@@ -47,3 +48,6 @@ module.exports = function(options) {
 
 module.exports.Panini = Panini;
 module.exports.refresh = function() {}
+module.exports.help = function() {
+  help();
+}
