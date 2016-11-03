@@ -125,6 +125,26 @@ Data can also be inserted into the page itself with a Front Matter template at t
 
 Lastly, the reserved `page` variable is added to every page template as it renders. It contains the name of the page being rendered, without the extension.
 
+## CLI
+
+You can also use panini via the CLI.
+
+```
+Usage: panini --layouts=[layoutdir] --root=[rootdir] --dest=[destdir] [other options] 'pagesglob'
+
+Options:
+  --layouts  (required) path to a folder containing layouts
+  --root     (required) path to the root folder all pages live in
+  --dest     (required) path to the folder compiled pages should get sent to
+  --partials            path to root folder for partials
+  --helpers             path to folder for additional helpers
+  --data                path to folder for additional data
+
+the argument pagesglob should be a glob describing what pages you want to apply panini to.
+
+Example: panini --root=src/pages --layouts=src/layouts --partials=src/partials --data=src/data --output=dist 'src/pages/**/*.html'
+```
+
 ## Local Development
 
 ```bash
