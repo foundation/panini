@@ -18,7 +18,8 @@ module.exports = function(pageName) {
     var options = params[params.length - 1];
 
     for (var i in pages) {
-      if (pages[i] === pageName) {
+      var pageReg = new RegExp(pages[i]);
+      if (pageReg.test(pageName)) {
         return options.fn(this);
       }
     }
