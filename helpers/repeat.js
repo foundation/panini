@@ -1,3 +1,5 @@
+var Handlebars = require('handlebars');
+
 /**
  * Handlebars block helper that repeats the content inside of it n number of times.
  * @param {integer} count - Number of times to repeat.
@@ -8,9 +10,18 @@
  */
 module.exports = function(count, options) {
   var str = '';
+  var data;
+
+  if (options.data) {
+    data = Handlebars.createFrame(options.data);
+  }
 
   for (var i = 0; i < count; i++) {
-    str += options.fn(this);
+    if (data) {
+      data.index = i;
+    }
+
+    str += options.fn(this, { data: data });
   }
 
   return str;
