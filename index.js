@@ -61,7 +61,6 @@ module.exports = function(src, opts, singleton) {
 
     options.input = src;
     var inst = new Panini(options);
-    inst.loadBuiltinHelpers();
     inst.refresh();
 
     if (!singleton) {
