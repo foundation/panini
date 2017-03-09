@@ -14,7 +14,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'basic/expected', FIXTURES + 'basic/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('builds a page with a custom layout', done => {
@@ -201,7 +202,7 @@ describe('Panini config', () => {
     process.chdir(originalCwd);
   });
 
-  it.only('loads configuration from package.json', done => {
+  it('loads configuration from package.json', done => {
     p('src')
       .pipe(dest('src/build'))
       .on('finish', () => {

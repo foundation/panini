@@ -24,6 +24,7 @@
     "nopt": "^4.0.1",
     "slash": "^1.0.0",
     "through2": "^2.0.0",
+    "vinyl": "^2.0.1",
     "vinyl-fs": "^2.4.4"
   },
   "devDependencies": {
