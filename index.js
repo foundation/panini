@@ -1,6 +1,7 @@
 var panini;
 var assign = require('lodash.assign');
 var getConfig = require('flexiconfig');
+var handlebars = require('handlebars');
 var help = require('./lib/helpMessage');
 var vfs = require('vinyl-fs');
 
@@ -19,7 +20,7 @@ function Panini(options) {
     pageLayouts: {},
     builtins: true,
   }, options);
-  this.Handlebars = require('handlebars');
+  this.Handlebars = handlebars.create();
   this.layouts = {};
   this.data = {};
 
