@@ -135,62 +135,6 @@ describe('Panini variables', () => {
   });
 });
 
-describe('Panini helpers', () => {
-  it('#code helper that renders code blocks', done => {
-    p(FIXTURES + 'helper-code')
-      .pipe(dest(FIXTURES + 'helper-code/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'helper-code/expected', FIXTURES + 'helper-code/build');
-        done();
-      });
-  });
-
-  it('#ifEqual helper that compares two values', done => {
-    p(FIXTURES + 'helper-ifequal')
-      .pipe(dest(FIXTURES + 'helper-ifequal/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'helper-ifequal/expected', FIXTURES + 'helper-ifequal/build');
-        done();
-      });
-  });
-
-  it('#ifpage helper that checks the current page', done => {
-    p(FIXTURES + 'helper-ifpage')
-      .pipe(dest(FIXTURES + 'helper-ifpage/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'helper-ifpage/expected', FIXTURES + 'helper-ifpage/build');
-        done();
-      });
-  });
-
-  it('#markdown helper that converts Markdown to HTML', done => {
-    p(FIXTURES + 'helper-markdown')
-      .pipe(dest(FIXTURES + 'helper-markdown/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'helper-markdown/expected', FIXTURES + 'helper-markdown/build');
-        done();
-      });
-  });
-
-  it('#repeat helper that prints content multiple times', done => {
-    p(FIXTURES + 'helper-repeat')
-      .pipe(dest(FIXTURES + 'helper-repeat/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'helper-repeat/expected', FIXTURES + 'helper-repeat/build');
-        done();
-      });
-  });
-
-  it('#unlesspage helper that checks the current page', done => {
-    p(FIXTURES + 'helper-unlesspage')
-      .pipe(dest(FIXTURES + 'helper-unlesspage/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'helper-unlesspage/expected', FIXTURES + 'helper-unlesspage/build');
-        done();
-      });
-  });
-});
-
 describe('Panini config', () => {
   var originalCwd = process.cwd();
 
