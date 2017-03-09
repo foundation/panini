@@ -125,7 +125,7 @@ describe('Panini variables', () => {
   });
 
   it('{{root}} variable that stores a relative path to the root folder', done => {
-    src(FIXTURES + 'variable-root')
+    p(FIXTURES + 'variable-root')
       .pipe(dest(FIXTURES + 'variable-root/build'))
       .on('finish', () => {
         equal(FIXTURES + 'variable-root/expected', FIXTURES + 'variable-root/build');
@@ -136,7 +136,7 @@ describe('Panini variables', () => {
 
 describe('Panini helpers', () => {
   it('#code helper that renders code blocks', done => {
-    src(FIXTURES + 'helper-code')
+    p(FIXTURES + 'helper-code')
       .pipe(dest(FIXTURES + 'helper-code/build'))
       .on('finish', () => {
         equal(FIXTURES + 'helper-code/expected', FIXTURES + 'helper-code/build');
@@ -145,7 +145,7 @@ describe('Panini helpers', () => {
   });
 
   it('#ifEqual helper that compares two values', done => {
-    src(FIXTURES + 'helper-ifequal')
+    p(FIXTURES + 'helper-ifequal')
       .pipe(dest(FIXTURES + 'helper-ifequal/build'))
       .on('finish', () => {
         equal(FIXTURES + 'helper-ifequal/expected', FIXTURES + 'helper-ifequal/build');
@@ -154,7 +154,7 @@ describe('Panini helpers', () => {
   });
 
   it('#ifpage helper that checks the current page', done => {
-    src(FIXTURES + 'helper-ifpage')
+    p(FIXTURES + 'helper-ifpage')
       .pipe(dest(FIXTURES + 'helper-ifpage/build'))
       .on('finish', () => {
         equal(FIXTURES + 'helper-ifpage/expected', FIXTURES + 'helper-ifpage/build');
@@ -163,7 +163,7 @@ describe('Panini helpers', () => {
   });
 
   it('#markdown helper that converts Markdown to HTML', done => {
-    src(FIXTURES + 'helper-markdown')
+    p(FIXTURES + 'helper-markdown')
       .pipe(dest(FIXTURES + 'helper-markdown/build'))
       .on('finish', () => {
         equal(FIXTURES + 'helper-markdown/expected', FIXTURES + 'helper-markdown/build');
@@ -172,7 +172,7 @@ describe('Panini helpers', () => {
   });
 
   it('#repeat helper that prints content multiple times', done => {
-    src(FIXTURES + 'helper-repeat')
+    p(FIXTURES + 'helper-repeat')
       .pipe(dest(FIXTURES + 'helper-repeat/build'))
       .on('finish', () => {
         equal(FIXTURES + 'helper-repeat/expected', FIXTURES + 'helper-repeat/build');
@@ -181,10 +181,31 @@ describe('Panini helpers', () => {
   });
 
   it('#unlesspage helper that checks the current page', done => {
-    src(FIXTURES + 'helper-unlesspage')
+    p(FIXTURES + 'helper-unlesspage')
       .pipe(dest(FIXTURES + 'helper-unlesspage/build'))
       .on('finish', () => {
         equal(FIXTURES + 'helper-unlesspage/expected', FIXTURES + 'helper-unlesspage/build');
+        done();
+      });
+  });
+});
+
+describe('Panini config', () => {
+  var originalCwd = process.cwd();
+
+  before(() => {
+    process.chdir(FIXTURES + 'config');
+  });
+
+  after(() => {
+    process.chdir(originalCwd);
+  });
+
+  it.only('loads configuration from package.json', done => {
+    p('src')
+      .pipe(dest('src/build'))
+      .on('finish', () => {
+        equal('src/expected', 'src/build');
         done();
       });
   });

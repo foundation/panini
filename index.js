@@ -1,5 +1,6 @@
 var panini;
 var assign = require('lodash.assign');
+var getConfig = require('flexiconfig');
 var help = require('./lib/helpMessage');
 var vfs = require('vinyl-fs');
 
@@ -47,9 +48,9 @@ Panini.prototype.getSourceStream = require('./lib/getSourceStream');
  * @param {boolean} singleton - Return a new Panini instance instead of the cached one.
  * @returns {Object} Transform stream with rendered files.
  */
-module.exports = function(src, options, singleton) {
+module.exports = function(src, opts, singleton) {
   if (!panini || singleton) {
-    options = options || {};
+    var options = getConfig(['package.json#panini', opts, {}]);
     options.input = src;
     var inst = new Panini(options);
     inst.loadBuiltinHelpers();
