@@ -50,7 +50,15 @@ Panini.prototype.getSourceStream = require('./lib/getSourceStream');
  */
 module.exports = function(src, opts, singleton) {
   if (!panini || singleton) {
-    var options = getConfig(['package.json#panini', opts, {}]);
+    var options;
+
+    try {
+      var options = getConfig(['package.json#panini', opts]);
+    }
+    catch (e) {
+      options = {};
+    }
+
     options.input = src;
     var inst = new Panini(options);
     inst.loadBuiltinHelpers();
