@@ -42,18 +42,15 @@ Panini.prototype.getSourceStream = require('./lib/getSourceStream');
 
 /**
  * Gulp stream function that renders HTML pages. The first time the function is invoked in the stream, a new instance of Panini is created with the given options.
+ * @param {string} src - Base folder for project.
  * @param {object} options - Configuration options to pass to the new Panini instance.
  * @param {boolean} singleton - Return a new Panini instance instead of the cached one.
  * @returns {Object} Transform stream with rendered files.
  */
-module.exports = function(options, singleton) {
+module.exports = function(src, options, singleton) {
   if (!panini || singleton) {
-    if (typeof options === 'string') {
-      options = {
-        input: options
-      };
-    }
-
+    options = options || {};
+    options.input = src;
     var inst = new Panini(options);
     inst.loadBuiltinHelpers();
     inst.refresh();

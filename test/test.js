@@ -5,7 +5,7 @@ import panini from '..';
 
 const FIXTURES = 'test/fixtures/';
 
-const p = opts => panini(opts, true);
+const p = (src, opts) => panini(src, opts, true);
 
 describe('Panini', () => {
   it('builds a page with a default layout', done => {
@@ -27,8 +27,7 @@ describe('Panini', () => {
   });
 
   it('builds a page with preset layouts by folder', done => {
-    p({
-      input: FIXTURES + 'page-layouts',
+    p(FIXTURES + 'page-layouts', {
       pageLayouts: {
         'alternate': 'alternate'
       }
@@ -77,8 +76,7 @@ describe('Panini', () => {
   });
 
   xit('builds a page with an array of external JSON data', done => {
-    p({
-      input: FIXTURES + 'data-array',
+    p(FIXTURES + 'data-array', {
       data: ['data', 'data-extra']
     })
       .pipe(dest(FIXTURES + 'data-array/build'))
@@ -98,7 +96,7 @@ describe('Panini', () => {
   });
 
   it('builds a page with external YAML data', done => {
-    src(FIXTURES + 'data-yaml')
+    p(FIXTURES + 'data-yaml')
       .pipe(dest(FIXTURES + 'data-yaml/build'))
       .on('finish', () => {
         equal(FIXTURES + 'data-yaml/expected', FIXTURES + 'data-yaml/build');
