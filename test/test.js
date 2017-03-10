@@ -1,11 +1,12 @@
 import { src, dest } from 'vinyl-fs';
 import assert from 'assert';
 import equal from 'assert-dir-equal';
+import assign from 'lodash.assign';
 import panini from '..';
 
 const FIXTURES = 'test/fixtures/';
 
-const p = (src, opts) => panini(src, opts, true);
+const p = (src, opts) => panini(src, assign({ quiet: true }, opts), true);
 
 describe('Panini', () => {
   it('builds a page with a default layout', done => {
