@@ -22,7 +22,7 @@
     "lodash.assign": "^4.2.0",
     "lodash.frompairs": "^4.0.1",
     "marked": "^0.3.6",
-    "nopt": "^4.0.1",
+    "meow": "^3.7.0",
     "pify": "^2.3.0",
     "slash": "^1.0.0",
     "through2": "^2.0.0",

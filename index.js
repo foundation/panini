@@ -1,7 +1,6 @@
 var panini;
 var Panini = require('./lib/panini');
 var getConfig = require('flexiconfig');
-var help = require('./lib/helpMessage');
 
 /**
  * Gulp stream function that renders HTML pages. The first time the function is invoked in the stream, a new instance of Panini is created with the given options.
@@ -36,7 +35,4 @@ module.exports = function(src, opts, singleton) {
 }
 
 module.exports.Panini = Panini;
-module.exports.refresh = function() {}
-module.exports.help = function() {
-  help();
-}
+module.exports.refresh = function() {};

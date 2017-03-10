@@ -1,58 +1,26 @@
 #!/usr/bin/env node
 
-var nopt       = require('nopt');
-var pkg        = require('../package.json');
-var panini     = require('../index');
-var vfs        = require('vinyl-fs');
-var path       = require('path');
+var meow = require('meow');
+var vfs = require('vinyl-fs');
+var panini = require('..');
 
+var cli = meow(`
+  Usage
+    $ panini <input> <output>
 
-// Options that can be passed to commands
-var options = {
-  "root": String,
-  "layouts": String,
-  "partials": String,
-  "data": String,
-  "helpers": String,
-  "output": String,
-  "version": String
-}
+  Options
+    -w, --watch  Watch for file changes
 
-// Shorthands for the above commands
-var shorthands = {
-  "r": "--root",
-  "l": "--layouts",
-  "p": "--partials",
-  "d": "--data",
-  "h": "--helpers",
-  "o": "--output",
-  "v": "--version"
-}
-
-var parsed = nopt(options, shorthands);
-
-// cmd.args contains basic commands like "new" and "help"
-// cmd.opts contains options, like --libsass and --version
-var cmd = {
-  args: parsed.argv.remain,
-  opts: parsed
-}
-
-// No other arguments given
-if (typeof cmd.args[0] === 'undefined') {
-  // If -v or --version was passed, show the version of the CLI
-  if (typeof cmd.opts.version !== 'undefined') {
-    process.stdout.write("Panini version " + require('../package.json').version + '\n');
+  Examples
+    panini ./src ./dest
+`, {
+  alias: {
+    w: 'watch'
   }
-  // Otherwise, just show the help screen
-  else {
-    panini.help();
-  }
+});
+
+if (cli.input.length < 2) {
+  cli.showHelp(1);
 }
 
-// Arguments given
-else {
-  vfs.src(cmd.args).
-       pipe(panini(cmd.opts)).
-       pipe(vfs.dest(cmd.opts.output));
-}
+panini(cli.input[0]).pipe(vfs.dest(cli.input[1]));
