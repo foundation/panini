@@ -1,8 +1,10 @@
 var panini;
 var assign = require('lodash.assign');
+var EventEmitter = require('events').EventEmitter;
 var getConfig = require('flexiconfig');
 var handlebars = require('handlebars');
 var help = require('./lib/helpMessage');
+var inherits = require('util').inherits;
 var vfs = require('vinyl-fs');
 
 /**
@@ -23,6 +25,7 @@ function Panini(options) {
   this.Handlebars = handlebars.create();
   this.layouts = {};
   this.data = {};
+  this.ready = false;
 
   if (!this.options.input) {
     throw new Error('Must specify an input directory.');
@@ -41,6 +44,20 @@ Panini.prototype.loadBuiltinHelpers = require('./lib/loadBuiltinHelpers');
 Panini.prototype.loadData = require('./lib/loadData');
 Panini.prototype.render = require('./lib/render');
 Panini.prototype.getSourceStream = require('./lib/getSourceStream');
+Panini.prototype.onReady = function() {
+  var _this = this;
+
+  return new Promise(function(resolve) {
+    if (_this.ready) {
+      resolve();
+    }
+    else {
+      _this.once('ready', resolve);
+    }
+  });
+}
+
+inherits(Panini, EventEmitter);
 
 /**
  * Gulp stream function that renders HTML pages. The first time the function is invoked in the stream, a new instance of Panini is created with the given options.
