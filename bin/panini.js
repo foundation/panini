@@ -23,4 +23,4 @@ if (cli.input.length < 2) {
   cli.showHelp(1);
 }
 
-panini(cli.input[0]).pipe(vfs.dest(cli.input[1]));
+panini(cli.input[0], { cli: true }).pipe(vfs.dest(cli.input[1]));
