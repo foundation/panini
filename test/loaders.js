@@ -2,6 +2,8 @@ import { expect } from 'chai';
 import { create } from 'handlebars';
 import loadLayouts from '../lib/loadLayouts';
 import loadData from '../lib/loadData';
+import loadHelpers from '../lib/loadHelpers';
+import loadPartials from '../lib/loadPartials';
 
 describe('loadLayouts', () => {
   it('creates an object of Handlebars templates', () => {
@@ -12,8 +14,8 @@ describe('loadLayouts', () => {
 });
 
 describe('loadData', () => {
-  it('creates an object of Handlebars templates', () => {
-    return loadData('test/fixtures/data-yaml/data', create()).then(res => {
+  it('fetches data files', () => {
+    return loadData('test/fixtures/data-yaml/data').then(res => {
       expect(res).to.eql({
         breakfast: [
           'eggs',
@@ -21,6 +23,24 @@ describe('loadData', () => {
           'toast'
         ]
       });
+    });
+  });
+});
+
+describe('loadHelpers', () => {
+  it('adds helpers to a Handlebars instance', () => {
+    const handlebars = create();
+    return loadHelpers('test/fixtures/helpers/helpers', handlebars).then(() => {
+      expect(handlebars.helpers).to.have.property('helper').that.is.a('function');
+    });
+  });
+});
+
+describe('loadPartials', () => {
+  it('adds partials to a Handlebars instance', () => {
+    const handlebars = create();
+    return loadPartials('test/fixtures/partials/partials', handlebars).then(() => {
+      expect(handlebars.partials).to.have.property('partial').that.is.a('string');
     });
   });
 });
