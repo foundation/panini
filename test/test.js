@@ -25,7 +25,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'layouts/expected', FIXTURES + 'layouts/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('builds a page with preset layouts by folder', done => {
@@ -38,7 +39,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'page-layouts/expected', FIXTURES + 'page-layouts/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('builds a page with custom partials', done => {
@@ -47,7 +49,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'partials/expected', FIXTURES + 'partials/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('builds a page with custom data', done => {
@@ -56,7 +59,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'data-page/expected', FIXTURES + 'data-page/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('builds a page with custom helpers', done => {
@@ -65,7 +69,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'helpers/expected', FIXTURES + 'helpers/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('builds a page with external JSON data', done => {
@@ -74,7 +79,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'data-json/expected', FIXTURES + 'data-json/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   xit('builds a page with an array of external JSON data', done => {
@@ -85,7 +91,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'data-array/expected', FIXTURES + 'data-array/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('builds a page with external JS data', done => {
@@ -94,7 +101,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'data-js/expected', FIXTURES + 'data-js/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('builds a page with external YAML data', done => {
@@ -103,7 +111,8 @@ describe('Panini', () => {
       .on('finish', () => {
         equal(FIXTURES + 'data-yaml/expected', FIXTURES + 'data-yaml/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 });
 
@@ -114,7 +123,8 @@ describe('Panini variables', () => {
       .on('finish', () => {
         equal(FIXTURES + 'variable-page/expected', FIXTURES + 'variable-page/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('{{layout}} variable that stores the current layout', done => {
@@ -123,7 +133,8 @@ describe('Panini variables', () => {
       .on('finish', () => {
         equal(FIXTURES + 'variable-layout/expected', FIXTURES + 'variable-layout/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 
   it('{{root}} variable that stores a relative path to the root folder', done => {
@@ -132,7 +143,8 @@ describe('Panini variables', () => {
       .on('finish', () => {
         equal(FIXTURES + 'variable-root/expected', FIXTURES + 'variable-root/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 });
 
@@ -153,6 +165,7 @@ describe('Panini config', () => {
       .on('finish', () => {
         equal('src/expected', 'src/build');
         done();
-      });
+      })
+      .on('error', done);
   });
 });
