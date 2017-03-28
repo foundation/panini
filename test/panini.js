@@ -1,6 +1,6 @@
-import chai, { expect } from 'chai';
+import chai, {expect} from 'chai';
 import chaiStream from 'chai-stream-es6';
-import { Panini } from '..';
+import {Panini} from '..';
 
 chai.use(chaiStream);
 
@@ -10,7 +10,7 @@ describe('Panini class', () => {
 
     before(() => {
       panini = new Panini({
-        input: 'src',
+        input: 'src'
       });
     });
 
@@ -29,7 +29,7 @@ describe('Panini class', () => {
 
   describe('getSourceStream()', () => {
     it('returns a stream', () => {
-      const panini = new Panini({ input: 'src' });
+      const panini = new Panini({input: 'src'});
       expect(panini.getSourceStream()).to.be.a.ReadableStream;
       expect(panini.getSourceStream()).to.be.a.WritableStream;
     });

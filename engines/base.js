@@ -1,8 +1,10 @@
 const path = require('path');
+const fs = require('fs');
 const pify = require('pify');
-const glob = pify(require('glob'));
-const readFile = pify(require('fs').readFile);
 const load = require('load-whatever');
+const glob = pify(require('glob'));
+
+const readFile = pify(fs.readFile);
 
 /**
  * Base class for a Panini rendering engine.
@@ -28,7 +30,7 @@ class PaniniEngine {
    */
   constructor(options) {
     if (this.constructor === PaniniEngine) {
-      throw new TypeError('Do not call the PaniniEngine class directly. Create a sub-class instead.')
+      throw new TypeError('Do not call the PaniniEngine class directly. Create a sub-class instead.');
     }
 
     this.options = options || {};
@@ -47,11 +49,11 @@ class PaniniEngine {
     const extensions = '**/*.{js,json,yml,yaml,cson}';
     this.data = {};
 
-    return this.constructor.mapPaths(this.options.input, this.options.data, extensions, (filePath) => {
+    return this.constructor.mapPaths(this.options.input, this.options.data, extensions, filePath => {
       return load(filePath).then(contents => {
         const name = path.basename(filePath, path.extname(filePath));
         this.data[name] = contents;
-      })
+      });
     });
   }
 

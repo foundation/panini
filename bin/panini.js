@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-var meow = require('meow');
-var vfs = require('vinyl-fs');
-var panini = require('..');
+const meow = require('meow');
+const vfs = require('vinyl-fs');
+const panini = require('..');
 
-var cli = meow(`
+const cli = meow(`
   Usage
     $ panini <input> <output>
 
@@ -23,4 +23,4 @@ if (cli.input.length < 2) {
   cli.showHelp(1);
 }
 
-panini(cli.input[0], { cli: true }).pipe(vfs.dest(cli.input[1]));
+panini(cli.input[0], {cli: true}).pipe(vfs.dest(cli.input[1]));

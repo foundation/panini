@@ -1,6 +1,6 @@
-var panini;
-var Panini = require('./lib/panini');
-var getConfig = require('flexiconfig');
+let panini;
+const getConfig = require('flexiconfig');
+const Panini = require('./lib/panini');
 
 /**
  * Gulp stream function that renders HTML pages. The first time the function is invoked in the stream, a new instance of Panini is created with the given options.
@@ -9,30 +9,31 @@ var getConfig = require('flexiconfig');
  * @param {boolean} singleton - Return a new Panini instance instead of the cached one.
  * @returns {Object} Transform stream with rendered files.
  */
-module.exports = function(src, opts, singleton) {
+module.exports = function (src, opts, singleton) {
+  let inst;
+
   if (!panini || singleton) {
-    var options;
+    let options;
 
     try {
-      var options = getConfig(['package.json#panini', opts]);
-    }
-    catch (e) {
+      options = getConfig(['package.json#panini', opts]);
+    } catch (err) {
       options = {};
     }
 
     options.input = src;
-    var inst = new Panini(options);
+    inst = new Panini(options);
     inst.refresh();
+  }
 
-    if (!singleton) {
-      panini = inst;
-      module.exports.refresh = inst.refresh.bind(inst);
-    }
+  if (!singleton) {
+    panini = inst;
+    module.exports.refresh = inst.refresh.bind(inst);
   }
 
   // Compile pages with the above helpers
   return inst.getSourceStream().pipe(inst.render());
-}
+};
 
 module.exports.Panini = Panini;
-module.exports.refresh = function() {};
+module.exports.refresh = function () {};

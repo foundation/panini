@@ -1,4 +1,4 @@
-var marked = require('marked');
+const marked = require('marked');
 
 /**
  * Handlebars block helper that converts Markdown to HTML.
@@ -7,6 +7,6 @@ var marked = require('marked');
  * {{#markdown}}Welcome to [zombo.com](http://zombo.com){{/markdown}}
  * @returns The Markdown inside the helper, converted to HTML.
  */
-module.exports = function(options) {
+module.exports = function (options) {
   return marked(options.fn(this));
-}
+};

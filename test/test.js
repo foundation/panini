@@ -1,12 +1,11 @@
-import { src, dest } from 'vinyl-fs';
-import assert from 'assert';
+import {dest} from 'vinyl-fs';
 import equal from 'assert-dir-equal';
 import assign from 'lodash.assign';
 import panini from '..';
 
 const FIXTURES = 'test/fixtures/';
 
-const p = (src, opts) => panini(src, assign({ quiet: true }, opts), true);
+const p = (src, opts) => panini(src, assign({quiet: true}, opts), true);
 
 describe('Panini', () => {
   it('builds a page with a default layout', done => {
@@ -32,7 +31,7 @@ describe('Panini', () => {
   it('builds a page with preset layouts by folder', done => {
     p(FIXTURES + 'page-layouts', {
       pageLayouts: {
-        'alternate': 'alternate'
+        alternate: 'alternate'
       }
     })
       .pipe(dest(FIXTURES + 'page-layouts/build'))
@@ -149,7 +148,7 @@ describe('Panini variables', () => {
 });
 
 describe('Panini config', () => {
-  var originalCwd = process.cwd();
+  const originalCwd = process.cwd();
 
   before(() => {
     process.chdir(FIXTURES + 'config');

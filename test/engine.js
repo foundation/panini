@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import File from 'vinyl';
+import {expect} from 'chai';
 import PaniniEngine from '../engines/base';
 import HandlebarsEngine from '../engines/handlebars';
 
@@ -16,13 +15,13 @@ describe('PaniniEngine', () => {
     });
 
     it('stores options', () => {
-      const opts = { input: 'src' };
+      const opts = {input: 'src'};
       const e = new Engine(opts);
       expect(e.options).to.eql(opts);
     });
 
     it('creates an object for layouts if the engine supports it', () => {
-      class LayoutEngine extends PaniniEngine {};
+      class LayoutEngine extends PaniniEngine {}
       LayoutEngine.features = ['layouts'];
       const e = new LayoutEngine();
       expect(e.layouts).to.eql({});
@@ -33,7 +32,7 @@ describe('PaniniEngine', () => {
     class Engine extends PaniniEngine {}
 
     it('loads data', () => {
-      const e = new Engine({ input: 'test/fixtures/data-js', data: 'data' });
+      const e = new Engine({input: 'test/fixtures/data-js', data: 'data'});
       return e.setup().then(() => expect(e.data).to.have.keys(['breakfast']));
     });
   });
@@ -73,7 +72,7 @@ describe('PaniniEngine', () => {
   describe('mapPaths()', () => {
     it('runs a callback on a set of files', () => {
       const map = PaniniEngine.mapPaths;
-      return map('test/fixtures/basic', 'layouts', '*.html', (path, file) => {
+      return map('test/fixtures/basic', 'layouts', '*.html', path => {
         expect(path).to.contain('test/fixtures/basic/layouts/default.html');
       });
     });
@@ -86,7 +85,7 @@ describe('HandlebarsEngine', () => {
     layouts: 'layouts',
     partials: 'partials',
     data: 'data',
-    helpers: 'helpers',
+    helpers: 'helpers'
   });
 
   describe('constructor()', () => {
@@ -95,7 +94,7 @@ describe('HandlebarsEngine', () => {
     });
 
     it('loads built-in helpers if configured to do so', () => {
-      const e = new HandlebarsEngine({ builtins: true });
+      const e = new HandlebarsEngine({builtins: true});
       expect(e.engine.helpers).to.contain.keys(['code', 'ifequal', 'markdown', 'repeat']);
     });
   });
@@ -126,7 +125,7 @@ describe('HandlebarsEngine', () => {
     const e = new HandlebarsEngine(options('test/fixtures/basic'));
     const data = {
       layout: 'default',
-      page: 'index',
+      page: 'index'
     };
 
     before(() => e.setup());
@@ -157,7 +156,7 @@ describe('HandlebarsEngine', () => {
     });
 
     it('captures error when template is not found', () => {
-      const output = e.render('', Object.assign({}, data, { layout: 'nope' }));
+      const output = e.render('', Object.assign({}, data, {layout: 'nope'}));
       expect(output).to.contain('<title>Panini error</title>');
     });
 

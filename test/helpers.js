@@ -1,11 +1,11 @@
 import assert from 'assert';
 import handlebars from 'handlebars';
 import code from '../helpers/code';
-import ifEqual from '../helpers/ifEqual';
-import ifPage from '../helpers/ifPage';
+import ifEqual from '../helpers/if-equal';
+import ifPage from '../helpers/if-page';
 import markdown from '../helpers/markdown';
 import repeat from '../helpers/repeat';
-import unlessPage from '../helpers/unlessPage';
+import unlessPage from '../helpers/unless-page';
 
 describe('Helpers', () => {
   describe('code', () => {

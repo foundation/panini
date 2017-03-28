@@ -1,6 +1,6 @@
-import { expect } from 'chai';
 import path from 'path';
-import processRoot from '../lib/processRoot';
+import {expect} from 'chai';
+import processRoot from '../lib/process-root';
 
 describe('processRoot()', () => {
   it('returns an empty string if both paths are on the same level', () => {

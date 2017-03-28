@@ -4,7 +4,7 @@
   "description": "A super tiny flat file compiler.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --reporter nyan"
+    "test": "xo && mocha --compilers js:babel-register --reporter nyan"
   },
   "author": "ZURB <foundation@zurb.com> (http://zurb.com)",
   "license": "MIT",
@@ -43,7 +43,8 @@
     "gulp": "^3.8.11",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.0.0",
-    "vinyl-fs": "^2.3.1"
+    "vinyl-fs": "^2.3.1",
+    "xo": "^0.18.1"
   },
   "repository": {
     "type": "git",
@@ -51,5 +52,22 @@
   },
   "bugs": {
     "url": "https://github.com/zurb/panini/issues"
+  },
+  "xo": {
+    "space": true,
+    "rules": {
+      "import/no-unresolved": [2, {
+        "caseSensitive": false
+      }]
+    },
+    "overrides": [
+      {
+        "files": "test/*.js",
+        "envs": ["node", "mocha"],
+        "rules": {
+          "no-unused-expressions": 0
+        }
+      }
+    ]
   }
 }

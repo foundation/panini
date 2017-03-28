@@ -1,5 +1,5 @@
-var format = require('util').format;
-var hljs = require('highlight.js');
+const format = require('util').format;
+const hljs = require('highlight.js');
 
 /**
  * Handlebars block helper that highlights code samples.
@@ -9,10 +9,12 @@ var hljs = require('highlight.js');
  * {{#code 'html'}}<a class="button">Button!</a>{{/code}}
  * @returns The HTML inside the helper, with highlight.js classes added.
  */
-module.exports = function(language, options) {
-  if (typeof language === 'undefined') language = 'html';
+module.exports = function (language, options) {
+  if (typeof language === 'undefined') {
+    language = 'html';
+  }
 
-  var code = hljs.highlight(language, options.fn(this)).value;
+  const code = hljs.highlight(language, options.fn(this)).value;
 
   return format('<div class="code-example"><pre><code class="%s">%s</code></pre></div>', language, code);
-}
+};
