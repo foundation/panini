@@ -1,10 +1,6 @@
 const path = require('path');
 const handlebars = require('handlebars');
 const PaniniEngine = require('./base');
-const loadData = require('../lib/loadData');
-const loadHelpers = require('../lib/loadHelpers');
-const loadLayouts = require('../lib/loadLayouts');
-const loadPartials = require('../lib/loadPartials');
 const ifPage = require('../helpers/ifPage');
 const unlessPage = require('../helpers/unlessPage');
 
@@ -30,15 +26,37 @@ class HandlebarsEngine extends PaniniEngine {
    * @returns {Promise} Promise which resolves when setup is done.
    */
   setup() {
+    const mapFiles = PaniniEngine.mapFiles;
+    const mapPaths = PaniniEngine.mapPaths;
+    const extensions = '**/*.{html,hbs,handlebars}';
     this.layouts = {};
 
     return Promise.all([
       super.setup(),
-      loadLayouts(path.join(this.options.input, this.options.layouts), this.engine).then(layouts => {
-        this.layouts = layouts;
+      mapFiles(this.options.input, this.options.layouts, extensions, (filePath, contents) => {
+        const name = path.basename(filePath, path.extname(filePath));
+        this.layouts[name] = this.engine.compile(contents);
       }),
-      loadPartials(path.join(this.options.input, this.options.partials), this.engine),
-      loadHelpers(path.join(this.options.input, this.options.helpers), this.engine),
+      mapFiles(this.options.input, this.options.partials, extensions, (filePath, contents) => {
+        const name = path.basename(filePath, path.extname(filePath));
+        this.engine.registerPartial(name, contents + '\n');
+      }),
+      mapPaths(this.options.input, this.options.helpers, '**/*.js', (filePath) => {
+        const name = path.basename(filePath, '.js');
+
+        try {
+          if (this.engine.helpers[name]) {
+            delete require.cache[require.resolve(filePath)];
+            this.engine.unregisterHelper(name);
+          }
+
+          const helper = require(filePath);
+          this.engine.registerHelper(name, helper);
+        }
+        catch (e) {
+          console.warn('Error when loading ' + name + '.js as a Handlebars helper.');
+        }
+      }),
     ]);
   }
 

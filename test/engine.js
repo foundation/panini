@@ -59,6 +59,25 @@ describe('PaniniEngine', () => {
       expect(e.supports('layouts')).to.be.false;
     });
   });
+
+  describe('mapFiles()', () => {
+    it('runs a callback on a set of files', () => {
+      const map = PaniniEngine.mapFiles;
+      return map('test/fixtures/basic', 'layouts', '*.html', (path, file) => {
+        expect(path).to.contain('test/fixtures/basic/layouts/default.html');
+        expect(file).to.contain('<html>');
+      });
+    });
+  });
+
+  describe('mapPaths()', () => {
+    it('runs a callback on a set of files', () => {
+      const map = PaniniEngine.mapPaths;
+      return map('test/fixtures/basic', 'layouts', '*.html', (path, file) => {
+        expect(path).to.contain('test/fixtures/basic/layouts/default.html');
+      });
+    });
+  });
 });
 
 describe('HandlebarsEngine', () => {

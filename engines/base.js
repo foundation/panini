@@ -1,11 +1,26 @@
 const path = require('path');
-const loadData = require('../lib/loadData');
+const pify = require('pify');
+const glob = pify(require('glob'));
+const readFile = pify(require('fs').readFile);
+const load = require('load-whatever');
 
 /**
  * Base class for a Panini rendering engine.
  * @abstract
  */
 class PaniniEngine {
+  static mapFiles(base, dir, pattern, cb) {
+    const globPath = path.join(process.cwd(), base, dir, pattern);
+    return glob(globPath).then(paths => Promise.all(paths.map(p =>
+      readFile(p).then(contents => cb(p, contents.toString()))
+    )));
+  }
+
+  static mapPaths(base, dir, pattern, cb) {
+    const globPath = path.join(process.cwd(), base, dir, pattern);
+    return glob(globPath).then(paths => Promise.all(paths.map(p => cb(p))));
+  }
+
   /**
    * Set up common settings for all rendering engines. Because `PaniniEngine` is considered an
    * abstract class, this constructor will never be called directly.
@@ -29,8 +44,14 @@ class PaniniEngine {
    * @returns {Promise} Promise which resolves when setup is done.
    */
   setup() {
-    return loadData(path.join(this.options.input, this.options.data)).then(data => {
-      this.data = data;
+    const extensions = '**/*.{js,json,yml,yaml,cson}';
+    this.data = {};
+
+    return this.constructor.mapPaths(this.options.input, this.options.data, extensions, (filePath) => {
+      return load(filePath).then(contents => {
+        const name = path.basename(filePath, path.extname(filePath));
+        this.data[name] = contents;
+      })
     });
   }
 
