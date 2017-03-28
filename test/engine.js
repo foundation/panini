@@ -1,6 +1,9 @@
+import path from 'path';
 import {expect} from 'chai';
+import File from 'vinyl';
 import PaniniEngine from '../engines/base';
 import HandlebarsEngine from '../engines/handlebars';
+import PugEngine from '../engines/pug';
 
 describe('PaniniEngine', () => {
   describe('constructor()', () => {
@@ -163,6 +166,63 @@ describe('HandlebarsEngine', () => {
     it('captures Handlebars errors', () => {
       const output = e.render('{{ foo | bar }}', data);
       expect(output).to.contain('template could not be parsed');
+    });
+  });
+});
+
+describe('PugEngine', () => {
+  const options = input => ({
+    input,
+    filters: 'filters',
+    data: 'data'
+  });
+
+  describe('constructor()', () => {
+    it('creates a new instance of PugEngine', () => {
+      expect(new PugEngine()).to.be.an.instanceOf(PugEngine);
+    });
+  });
+
+  describe('setup()', () => {
+    it('loads data', () => {
+      const e = new PugEngine(options('test/fixtures/pug'));
+      return e.setup().then(() => expect(e.data).to.have.keys(['data']));
+    });
+
+    it('loads filters', () => {
+      const e = new PugEngine(options('test/fixtures/pug'));
+      return e.setup().then(() => expect(e.filters).to.have.keys(['filter']));
+    });
+  });
+
+  describe('render()', () => {
+    const file = new File({
+      base: path.join(process.cwd(), 'test/fixtures/pug/pages'),
+      path: path.join(process.cwd(), 'test/fixtures/pug/pages/index.pug')
+    });
+    const e = new PugEngine(options('test/fixtures/pug'));
+    const data = {
+      page: 'index'
+    };
+    before(() => e.setup());
+
+    it('renders a template', () => {
+      expect(e.render('p= page', data, file)).to.contain('<p>index</p>');
+    });
+
+    it('allows for relative includes', () => {
+      const page = 'include ../layouts/default.pug\n\nblock content\n\n  p Hello';
+      expect(e.render(page, data, file)).to.contain('Hello');
+    });
+
+    it('allows for absolute includes', () => {
+      const page = 'include /layouts/default.pug\n\nblock content\n\n  p Hello';
+      expect(e.render(page, data, file)).to.contain('Hello');
+    });
+
+    it('renders filters', () => {
+      const page = ':filter\n  hello';
+      expect(e.render(page, data, file)).to.contain('HELLO');
     });
   });
 });

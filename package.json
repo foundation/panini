@@ -43,6 +43,7 @@
     "gulp": "^3.8.11",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.0.0",
+    "pug": "^2.0.0-beta11",
     "vinyl-fs": "^2.3.1",
     "xo": "^0.18.1"
   },
@@ -59,14 +60,20 @@
   "xo": {
     "space": true,
     "rules": {
-      "import/no-unresolved": [2, {
-        "caseSensitive": false
-      }]
+      "import/no-unresolved": [
+        2,
+        {
+          "caseSensitive": false
+        }
+      ]
     },
     "overrides": [
       {
         "files": "test/*.js",
-        "envs": ["node", "mocha"],
+        "envs": [
+          "node",
+          "mocha"
+        ],
         "rules": {
           "no-unused-expressions": 0
         }
