@@ -82,18 +82,6 @@ describe('Panini', () => {
       .on('error', done);
   });
 
-  xit('builds a page with an array of external JSON data', done => {
-    p(FIXTURES + 'data-array', {
-      data: ['data', 'data-extra']
-    })
-      .pipe(dest(FIXTURES + 'data-array/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'data-array/expected', FIXTURES + 'data-array/build');
-        done();
-      })
-      .on('error', done);
-  });
-
   it('builds a page with external JS data', done => {
     p(FIXTURES + 'data-js')
       .pipe(dest(FIXTURES + 'data-js/build'))
