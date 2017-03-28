@@ -53,6 +53,9 @@
   "bugs": {
     "url": "https://github.com/zurb/panini/issues"
   },
+  "engines": {
+    "node": ">=4"
+  },
   "xo": {
     "space": true,
     "rules": {
