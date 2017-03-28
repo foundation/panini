@@ -11,6 +11,16 @@ const readFile = pify(fs.readFile);
  * @abstract
  */
 class PaniniEngine {
+  /**
+   * Get all files matching a pattern and run a function that gets each file's path and contents.
+   * Use this method in an engine to fetch the contents of files to load layouts, partials, etc.
+   * The callback can return a promise if an asynchronous action is needed.
+   * @param {String} base - Root path to search in. This is usually `this.options.input`.
+   * @param {String} dir - Directory to search in. This is usually a member of `this.options`.
+   * @param {String} pattern - Glob pattern to append. This is usually a series of file extensions.
+   * @param {Function} cb - Function to run on each file. Gets `path` and `contents` arguments.
+   * @returns {Promise} Promise which resolves when all files have been processed.
+   */
   static mapFiles(base, dir, pattern, cb) {
     const globPath = path.join(process.cwd(), base, dir, pattern);
     return glob(globPath).then(paths => Promise.all(paths.map(p =>
@@ -18,6 +28,16 @@ class PaniniEngine {
     )));
   }
 
+  /**
+   * Get all files matching a pattern and run a function that gets each file's path.
+   * Use this method in an engine to fetch and store all paths matching a set of criteria.
+   * The callback can return a promise if an asynchronous action is needed.
+   * @param {String} base - Root path to search in. This is usually `this.options.input`.
+   * @param {String} dir - Directory to search in. This is usually a member of `this.options`.
+   * @param {String} pattern - Glob pattern to append. This is usually a series of file extensions.
+   * @param {Function} cb - Function to run on each file. Gets `path` argument.
+   * @returns {Promise} Promise which resolves when all files have been processed.
+   */
   static mapPaths(base, dir, pattern, cb) {
     const globPath = path.join(process.cwd(), base, dir, pattern);
     return glob(globPath).then(paths => Promise.all(paths.map(p => cb(p))));
