@@ -4,7 +4,7 @@ const path = require('path');
 const handlebars = require('handlebars');
 const ifPage = require('../helpers/if-page');
 const unlessPage = require('../helpers/unless-page');
-const PaniniEngine = require('./base');
+const PaniniEngine = require('../lib/engine');
 
 /**
  * Panini engine to render Handlebars templates.

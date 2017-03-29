@@ -2,7 +2,7 @@
 
 const path = require('path');
 const pug = require('pug');
-const PaniniEngine = require('./base');
+const PaniniEngine = require('../lib/engine');
 
 /**
  * Panini engine to render Handlebars templates.

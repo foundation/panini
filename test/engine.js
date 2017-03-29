@@ -3,7 +3,7 @@
 const path = require('path');
 const expect = require('chai').expect;
 const File = require('vinyl');
-const PaniniEngine = require('../engines/base');
+const PaniniEngine = require('../lib/engine');
 const HandlebarsEngine = require('../engines/handlebars');
 const PugEngine = require('../engines/pug');
 
