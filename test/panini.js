@@ -3,9 +3,9 @@
 const chai = require('chai');
 const chaiStream = require('chai-stream-es6').default;
 const Panini = require('..').Panini;
+const PugEngine = require('../engines/pug');
 
 const expect = chai.expect;
-console.log(chaiStream);
 chai.use(chaiStream);
 
 describe('Panini class', () => {
@@ -28,6 +28,14 @@ describe('Panini class', () => {
 
     it('throws an error if no input option is set', () => {
       expect(() => new Panini()).to.throw(Error);
+    });
+
+    it('allows the engine to be changed', () => {
+      const p = new Panini({
+        input: 'src',
+        engine: 'pug'
+      });
+      expect(p.engine).to.be.an.instanceOf(PugEngine);
     });
   });
 
