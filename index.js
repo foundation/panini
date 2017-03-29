@@ -31,7 +31,6 @@ module.exports = function (src, opts, singleton) {
 
   if (!singleton) {
     panini = inst;
-    module.exports.refresh = inst.refresh.bind(inst);
   }
 
   // Compile pages with the above helpers
@@ -39,4 +38,3 @@ module.exports = function (src, opts, singleton) {
 };
 
 module.exports.Panini = Panini;
-module.exports.refresh = function () {};
