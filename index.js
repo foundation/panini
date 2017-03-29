@@ -1,6 +1,9 @@
-let panini;
+'use strict';
+
 const getConfig = require('flexiconfig');
 const Panini = require('./lib/panini');
+
+let panini;
 
 /**
  * Gulp stream function that renders HTML pages. The first time the function is invoked in the stream, a new instance of Panini is created with the given options.

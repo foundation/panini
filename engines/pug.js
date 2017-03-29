@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const pug = require('pug');
 const PaniniEngine = require('./base');

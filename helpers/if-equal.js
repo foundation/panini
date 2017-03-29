@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Handlebars block helper that checks if two values are equal.
  * @param {mixed} a - First value to compare.

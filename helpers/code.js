@@ -1,3 +1,5 @@
+'use strict';
+
 const format = require('util').format;
 const hljs = require('highlight.js');
 

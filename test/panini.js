@@ -1,7 +1,11 @@
-import chai, {expect} from 'chai';
-import chaiStream from 'chai-stream-es6';
-import {Panini} from '..';
+'use strict';
 
+const chai = require('chai');
+const chaiStream = require('chai-stream-es6').default;
+const Panini = require('..').Panini;
+
+const expect = chai.expect;
+console.log(chaiStream);
 chai.use(chaiStream);
 
 describe('Panini class', () => {

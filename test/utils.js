@@ -1,6 +1,8 @@
-import path from 'path';
-import {expect} from 'chai';
-import processRoot from '../lib/process-root';
+'use strict';
+
+const path = require('path');
+const expect = require('chai').expect;
+const processRoot = require('../lib/process-root');
 
 describe('processRoot()', () => {
   it('returns an empty string if both paths are on the same level', () => {

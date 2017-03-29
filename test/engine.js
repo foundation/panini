@@ -1,9 +1,11 @@
-import path from 'path';
-import {expect} from 'chai';
-import File from 'vinyl';
-import PaniniEngine from '../engines/base';
-import HandlebarsEngine from '../engines/handlebars';
-import PugEngine from '../engines/pug';
+'use strict';
+
+const path = require('path');
+const expect = require('chai').expect;
+const File = require('vinyl');
+const PaniniEngine = require('../engines/base');
+const HandlebarsEngine = require('../engines/handlebars');
+const PugEngine = require('../engines/pug');
 
 describe('PaniniEngine', () => {
   describe('constructor()', () => {

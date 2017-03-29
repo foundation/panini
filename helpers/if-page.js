@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Generates a Handlebars block helper called #ifpage for use in templates. This helper must be re-generated for every page that's rendered, because the return value of the function is dependent on the name of the current page.
  * @param {string} pageName - Name of the page to use in the helper function.

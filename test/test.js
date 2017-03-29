@@ -1,10 +1,11 @@
-import {dest} from 'vinyl-fs';
-import equal from 'assert-dir-equal';
-import assign from 'lodash.assign';
-import panini from '..';
+'use strict';
+
+const dest = require('vinyl-fs').dest;
+const equal = require('assert-dir-equal');
+const assign = require('lodash.assign');
+const panini = require('..');
 
 const FIXTURES = 'test/fixtures/';
-
 const p = (src, opts) => panini(src, assign({quiet: true}, opts), true);
 
 describe('Panini', () => {

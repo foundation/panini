@@ -1,11 +1,13 @@
-import assert from 'assert';
-import handlebars from 'handlebars';
-import code from '../helpers/code';
-import ifEqual from '../helpers/if-equal';
-import ifPage from '../helpers/if-page';
-import markdown from '../helpers/markdown';
-import repeat from '../helpers/repeat';
-import unlessPage from '../helpers/unless-page';
+'use strict';
+
+const assert = require('assert');
+const handlebars = require('handlebars');
+const code = require('../helpers/code');
+const ifEqual = require('../helpers/if-equal');
+const ifPage = require('../helpers/if-page');
+const markdown = require('../helpers/markdown');
+const repeat = require('../helpers/repeat');
+const unlessPage = require('../helpers/unless-page');
 
 describe('Helpers', () => {
   describe('code', () => {

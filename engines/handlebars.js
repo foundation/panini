@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const handlebars = require('handlebars');
 const ifPage = require('../helpers/if-page');
