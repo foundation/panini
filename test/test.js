@@ -104,38 +104,6 @@ describe('Panini', () => {
   });
 });
 
-describe('Panini variables', () => {
-  it('{{page}} variable that stores the current page', done => {
-    p(FIXTURES + 'variable-page')
-      .pipe(dest(FIXTURES + 'variable-page/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'variable-page/expected', FIXTURES + 'variable-page/build');
-        done();
-      })
-      .on('error', done);
-  });
-
-  it('{{layout}} variable that stores the current layout', done => {
-    p(FIXTURES + 'variable-layout')
-      .pipe(dest(FIXTURES + 'variable-layout/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'variable-layout/expected', FIXTURES + 'variable-layout/build');
-        done();
-      })
-      .on('error', done);
-  });
-
-  it('{{root}} variable that stores a relative path to the root folder', done => {
-    p(FIXTURES + 'variable-root')
-      .pipe(dest(FIXTURES + 'variable-root/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'variable-root/expected', FIXTURES + 'variable-root/build');
-        done();
-      })
-      .on('error', done);
-  });
-});
-
 describe('Panini config', () => {
   const originalCwd = process.cwd();
 
