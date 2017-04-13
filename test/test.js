@@ -20,7 +20,7 @@ describe('Panini', () => {
       .on('error', done);
   });
 
-  it('builds a page with a custom layout', done => {
+  it('builds a page with an alternate layout', done => {
     p(FIXTURES + 'layouts')
       .pipe(dest(FIXTURES + 'layouts/build'))
       .on('finish', () => {
@@ -54,11 +54,11 @@ describe('Panini', () => {
       .on('error', done);
   });
 
-  it('builds a page with custom data', done => {
-    p(FIXTURES + 'data-page')
-      .pipe(dest(FIXTURES + 'data-page/build'))
+  it('builds a page with Front Matter properties added as variables', done => {
+    p(FIXTURES + 'front-matter')
+      .pipe(dest(FIXTURES + 'front-matter/build'))
       .on('finish', () => {
-        equal(FIXTURES + 'data-page/expected', FIXTURES + 'data-page/build');
+        equal(FIXTURES + 'front-matter/expected', FIXTURES + 'front-matter/build');
         done();
       })
       .on('error', done);
@@ -75,10 +75,10 @@ describe('Panini', () => {
   });
 
   it('builds a page with external JSON data', done => {
-    p(FIXTURES + 'data-json')
-      .pipe(dest(FIXTURES + 'data-json/build'))
+    p(FIXTURES + 'data')
+      .pipe(dest(FIXTURES + 'data/build'))
       .on('finish', () => {
-        equal(FIXTURES + 'data-json/expected', FIXTURES + 'data-json/build');
+        equal(FIXTURES + 'data/expected', FIXTURES + 'data/build');
         done();
       })
       .on('error', done);
