@@ -83,26 +83,6 @@ describe('Panini', () => {
       })
       .on('error', done);
   });
-
-  it('builds a page with external JS data', done => {
-    p(FIXTURES + 'data-js')
-      .pipe(dest(FIXTURES + 'data-js/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'data-js/expected', FIXTURES + 'data-js/build');
-        done();
-      })
-      .on('error', done);
-  });
-
-  it('builds a page with external YAML data', done => {
-    p(FIXTURES + 'data-yaml')
-      .pipe(dest(FIXTURES + 'data-yaml/build'))
-      .on('finish', () => {
-        equal(FIXTURES + 'data-yaml/expected', FIXTURES + 'data-yaml/build');
-        done();
-      })
-      .on('error', done);
-  });
 });
 
 describe('Panini config', () => {

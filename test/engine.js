@@ -37,7 +37,7 @@ describe('PaniniEngine', () => {
     class Engine extends PaniniEngine {}
 
     it('loads data', () => {
-      const e = new Engine({input: 'test/fixtures/data-js', data: 'data'});
+      const e = new Engine({input: 'test/fixtures/data-json', data: 'data'});
       return e.setup().then(() => expect(e.data).to.have.keys(['breakfast']));
     });
   });
@@ -121,7 +121,7 @@ describe('HandlebarsEngine', () => {
     });
 
     it('loads data', () => {
-      const e = new HandlebarsEngine(options('test/fixtures/data-js'));
+      const e = new HandlebarsEngine(options('test/fixtures/data-json'));
       return e.setup().then(() => expect(e.data).to.have.keys(['breakfast']));
     });
   });
