@@ -47,6 +47,10 @@ describe('Panini', () => {
   it('builds a page with external JSON data', () => {
     return testFixture('data').then(page => snapshot(page));
   });
+
+  it('builds a page with a list of every other page', () => {
+    return testFixture('page-list').then(page => snapshot(page));
+  });
 });
 
 describe('Panini config', () => {
