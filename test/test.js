@@ -1,53 +1,51 @@
 'use strict';
 
 const expect = require('chai').expect;
-const dest = require('vinyl-fs').dest;
-const assertDirEqual = require('assert-dir-equal');
 const assign = require('lodash.assign');
+const snapshot = require('snap-shot');
 const panini = require('..');
 
 const fixtures = 'test/fixtures';
 const testFixture = (src, opts) => new Promise((resolve, reject) => {
   panini(`${fixtures}/${src}`, assign({quiet: true}, opts), true)
-    .pipe(dest(`${fixtures}/${src}/build`))
-    .on('finish', () => {
-      assertDirEqual(`${fixtures}/${src}/build`, `${fixtures}/${src}/expected`);
-      resolve();
+    .once('data', data => {
+      resolve(data.contents.toString());
     })
     .on('error', reject);
 });
 
 describe('Panini', () => {
   it('builds a page with a default layout', () => {
-    return testFixture('basic');
+    return testFixture('basic').then(page => snapshot(page));
   });
 
   it('builds a page with an alternate layout', () => {
-    return testFixture('layouts');
+    return testFixture('layouts').then(page => snapshot(page));
   });
 
   it('builds a page with preset layouts by folder', () => {
-    return testFixture('page-layouts', {
+    const opts = {
       pageLayouts: {
         alternate: 'alternate'
       }
-    });
+    };
+    return testFixture('page-layouts', opts).then(page => snapshot(page));
   });
 
   it('builds a page with custom partials', () => {
-    return testFixture('partials');
+    return testFixture('partials').then(page => snapshot(page));
   });
 
   it('builds a page with Front Matter properties added as variables', () => {
-    return testFixture('front-matter');
+    return testFixture('front-matter').then(page => snapshot(page));
   });
 
   it('builds a page with custom helpers', () => {
-    return testFixture('helpers');
+    return testFixture('helpers').then(page => snapshot(page));
   });
 
   it('builds a page with external JSON data', () => {
-    return testFixture('data');
+    return testFixture('data').then(page => snapshot(page));
   });
 });
 

@@ -44,6 +44,7 @@
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.0.0",
     "pug": "^2.0.0-beta11",
+    "snap-shot": "^2.17.0",
     "vinyl-fs": "^2.3.1",
     "xo": "^0.18.1"
   },
