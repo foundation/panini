@@ -17,6 +17,9 @@ class HandlebarsEngine extends PaniniEngine {
   constructor(options) {
     super(options);
     this.engine = handlebars.create();
+    this.compilerOpts = {
+      preventIndent: true
+    };
 
     if (this.options.builtins) {
       this.loadBultins();
@@ -37,7 +40,7 @@ class HandlebarsEngine extends PaniniEngine {
       super.setup(),
       mapFiles(this.options.input, this.options.layouts, extensions, (filePath, contents) => {
         const name = path.basename(filePath, path.extname(filePath));
-        this.layouts[name] = this.engine.compile(contents);
+        this.layouts[name] = this.engine.compile(contents, this.compilerOpts);
       }),
       mapFiles(this.options.input, this.options.partials, extensions, (filePath, contents) => {
         const name = path.basename(filePath, path.extname(filePath));

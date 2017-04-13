@@ -1,14 +1,14 @@
-exports['builds a page with a default layout 1'] = "<html>\n  <body>\n    <p>Body</p>\n    \n  </body>\n</html>\n"
+exports['builds a page with a default layout 1'] = "<html>\n  <body>\n    <p>Body</p>\n\n  </body>\n</html>\n"
 
-exports['builds a page with an alternate layout 1'] = "<html>\n  <body class=\"alternate\">\n    <p>Body</p>\n    \n  </body>\n</html>\n"
+exports['builds a page with an alternate layout 1'] = "<html>\n  <body class=\"alternate\">\n    <p>Body</p>\n\n  </body>\n</html>\n"
 
-exports['builds a page with preset layouts by folder 1'] = "<html>\n  <body class=\"alternate\">\n    <p>Body</p>\n    \n  </body>\n</html>\n"
+exports['builds a page with preset layouts by folder 1'] = "<html>\n  <body class=\"alternate\">\n    <p>Body</p>\n\n  </body>\n</html>\n"
 
-exports['builds a page with custom partials 1'] = "<html>\n  <body>\n    <p>Body</p>\n    <p>Partial!</p>\n    \n    \n  </body>\n</html>\n"
+exports['builds a page with custom partials 1'] = "<html>\n  <body>\n    <p>Body</p>\n<p>Partial!</p>\n\n\n  </body>\n</html>\n"
 
-exports['builds a page with Front Matter properties added as variables 1'] = "<html>\n  <body>\n    Layout: Yes, kittens.\n    Page: Yes, kittens.\n    \n    Partial: Yes, kittens.\n    \n  </body>\n</html>\n"
+exports['builds a page with Front Matter properties added as variables 1'] = "<html>\n  <body>\n    Layout: Yes, kittens.\n    Page: Yes, kittens.\n\n    Partial: Yes, kittens.\n\n  </body>\n</html>\n"
 
-exports['builds a page with custom helpers 1'] = "<html>\n  <body>\n    Helper!\n    \n  </body>\n</html>\n"
+exports['builds a page with custom helpers 1'] = "<html>\n  <body>\n    Helper!\n\n  </body>\n</html>\n"
 
-exports['builds a page with external JSON data 1'] = "<html>\n  <body>\n    eggs\n    bacon\n    toast\n    \n  </body>\n</html>\n"
+exports['builds a page with external JSON data 1'] = "<html>\n  <body>\n    eggs\nbacon\ntoast\n\n  </body>\n</html>\n"
 
