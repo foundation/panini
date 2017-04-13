@@ -1,5 +1,6 @@
 'use strict';
 
+const {expect} = require('chai');
 const dest = require('vinyl-fs').dest;
 const equal = require('assert-dir-equal');
 const assign = require('lodash.assign');
@@ -106,6 +107,7 @@ describe('Panini', () => {
 
 describe('Panini config', () => {
   const originalCwd = process.cwd();
+  const config = require('./fixtures/config/package.json');
 
   before(() => {
     process.chdir(FIXTURES + 'config');
@@ -115,13 +117,8 @@ describe('Panini config', () => {
     process.chdir(originalCwd);
   });
 
-  it('loads configuration from package.json', done => {
-    p('src')
-      .pipe(dest('src/build'))
-      .on('finish', () => {
-        equal('src/expected', 'src/build');
-        done();
-      })
-      .on('error', done);
+  it('loads configuration from package.json', () => {
+    const stream = p('src');
+    expect(stream._panini.options.pages).to.equal(config.panini.pages);
   });
 });
