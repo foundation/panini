@@ -48,7 +48,7 @@ class PugEngine extends PaniniEngine {
       });
       return template(pageData);
     } catch (err) {
-      return `<!DOCTYPE html><html><head><title>Panini error</title></head><body><pre>${err}</pre></body></html>`;
+      return this.error(err, file.path);
     }
   }
 }

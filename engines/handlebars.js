@@ -78,10 +78,10 @@ class HandlebarsEngine extends PaniniEngine {
    * Render a Handlebars page and layout.
    * @param {String} pageBody - Handlebars template string.
    * @param {Object} pageData - Handlebars context.
-   * @param {Object} [file] - Vinyl source file.
+   * @param {Object} file - Vinyl source file.
    * @returns {String} Rendered page.
    */
-  render(pageBody, pageData) {
+  render(pageBody, pageData, file) {
     const layoutTemplate = this.layouts[pageData.layout];
 
     try {
@@ -103,14 +103,7 @@ class HandlebarsEngine extends PaniniEngine {
       this.engine.registerPartial('body', pageTemplate);
       return layoutTemplate(pageData);
     } catch (err) {
-      if (layoutTemplate) {
-        // If the page had a rendering error, print the error and insert it into the layout
-        this.engine.registerPartial('body', 'Panini: template could not be parsed.<br>\n<pre>{{error}}</pre>');
-        return layoutTemplate({error: err});
-      }
-
-        // If the layout had a rendering error, print the error in place of the layout
-      return `<!DOCTYPE html><html><head><title>Panini error</title></head><body><pre>${err}</pre></body></html>`;
+      return this.error(err, file.path);
     }
   }
 }

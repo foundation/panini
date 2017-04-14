@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "deepmerge": "^1.3.2",
+    "extract-stack": "^1.0.0",
     "flexiconfig": "^2.0.0",
     "front-matter": "^2.0.5",
     "glob": "^7.0.0",
