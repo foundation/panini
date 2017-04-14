@@ -112,7 +112,12 @@ describe('HandlebarsEngine', () => {
 
     it('loads partials', () => {
       const e = new HandlebarsEngine(options('test/fixtures/partials'));
-      return e.setup().then(() => expect(e.engine.partials).to.have.keys(['partial']));
+      return e.setup().then(() => expect(e.engine.partials).to.contain.keys(['partial']));
+    });
+
+    it('loads partials in a subfolder', () => {
+      const e = new HandlebarsEngine(options('test/fixtures/partials'));
+      return e.setup().then(() => expect(e.engine.partials).to.contain.keys(['subfolder/partial']));
     });
 
     it('loads helpers', () => {
@@ -132,42 +137,45 @@ describe('HandlebarsEngine', () => {
       layout: 'default',
       page: 'index'
     };
+    const file = {
+      path: 'test/fixtures/basic/pages/index.hbs'
+    };
 
     before(() => e.setup());
 
     it('renders a page', () => {
-      const output = e.render('<h1>Page</h1>', data);
+      const output = e.render('<h1>Page</h1>', data, file);
       expect(output).to.contain('<h1>Page</h1>');
     });
 
     it('renders the layout of the page', () => {
-      const output = e.render('<h1>Page</h1>', data);
+      const output = e.render('<h1>Page</h1>', data, file);
       expect(output).to.contain('<html>');
     });
 
     it('inserts the data of the page into the template', () => {
-      const output = e.render('<h1>{{ layout }}</h1>', data);
+      const output = e.render('<h1>{{ layout }}</h1>', data, file);
       expect(output).to.contain('<h1>default</h1>');
     });
 
     it('registers #ifpage helper', () => {
-      const output = e.render('<h1>{{#ifpage "index"}}index{{/ifpage}}</h1>', data);
+      const output = e.render('<h1>{{#ifpage "index"}}index{{/ifpage}}</h1>', data, file);
       expect(output).to.contain('<h1>index</h1>');
     });
 
     it('registers #unlesspage helper', () => {
-      const output = e.render('<h1>{{#unlesspage "about"}}index{{/unlesspage}}</h1>', data);
+      const output = e.render('<h1>{{#unlesspage "about"}}index{{/unlesspage}}</h1>', data, file);
       expect(output).to.contain('<h1>index</h1>');
     });
 
     it('captures error when template is not found', () => {
-      const output = e.render('', Object.assign({}, data, {layout: 'nope'}));
-      expect(output).to.contain('<title>Panini error</title>');
+      const output = e.render('', Object.assign({}, data, {layout: 'nope'}), file);
+      expect(output).to.contain('<!-- __PANINI_ERROR__ -->');
     });
 
     it('captures Handlebars errors', () => {
-      const output = e.render('{{ foo | bar }}', data);
-      expect(output).to.contain('template could not be parsed');
+      const output = e.render('{{ foo | bar }}', data, file);
+      expect(output).to.contain('<!-- __PANINI_ERROR__ -->');
     });
   });
 });

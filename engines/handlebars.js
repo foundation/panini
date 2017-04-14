@@ -43,7 +43,10 @@ class HandlebarsEngine extends PaniniEngine {
         this.layouts[name] = this.engine.compile(contents, this.compilerOpts);
       }),
       mapFiles(this.options.input, this.options.partials, extensions, (filePath, contents) => {
-        const name = path.basename(filePath, path.extname(filePath));
+        const name = path.relative(
+          path.join(process.cwd(), this.options.input, this.options.partials),
+          filePath
+        ).replace(/\..*$/, '');
         this.engine.registerPartial(name, contents + '\n');
       }),
       mapPaths(this.options.input, this.options.helpers, '**/*.js', filePath => {
