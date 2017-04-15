@@ -105,5 +105,17 @@ describe('Panini class', () => {
       });
       expect(p.getPageData(file, {})).to.have.property('root', '../');
     });
+
+    it('includes template helpers', () => {
+      expect(p.getPageData(file, {})).to.have.property('helpers').that.is.an('object');
+    });
+
+    it('can omit template helpers', () => {
+      const p = new Panini({
+        input: 'src',
+        builtins: false
+      });
+      expect(p.getPageData(file, {})).to.not.have.property('helpers');
+    });
   });
 });

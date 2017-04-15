@@ -29,6 +29,7 @@
     "pify": "^2.3.0",
     "replace-ext": "^1.0.0",
     "slash": "^1.0.0",
+    "template-helpers": "^0.6.7",
     "through2": "^2.0.0",
     "vinyl": "^2.0.1",
     "vinyl-fs": "^2.4.4"
