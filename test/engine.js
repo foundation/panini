@@ -97,11 +97,6 @@ describe('HandlebarsEngine', () => {
     it('creates a new instance of HandlebarsEngine', () => {
       expect(new HandlebarsEngine()).to.be.an.instanceOf(HandlebarsEngine);
     });
-
-    it('loads built-in helpers if configured to do so', () => {
-      const e = new HandlebarsEngine({builtins: true});
-      expect(e.engine.helpers).to.contain.keys(['code', 'ifequal', 'markdown', 'repeat']);
-    });
   });
 
   describe('setup()', () => {
@@ -156,16 +151,6 @@ describe('HandlebarsEngine', () => {
     it('inserts the data of the page into the template', () => {
       const output = e.render('<h1>{{ layout }}</h1>', data, file);
       expect(output).to.contain('<h1>default</h1>');
-    });
-
-    it('registers #ifpage helper', () => {
-      const output = e.render('<h1>{{#ifpage "index"}}index{{/ifpage}}</h1>', data, file);
-      expect(output).to.contain('<h1>index</h1>');
-    });
-
-    it('registers #unlesspage helper', () => {
-      const output = e.render('<h1>{{#unlesspage "about"}}index{{/unlesspage}}</h1>', data, file);
-      expect(output).to.contain('<h1>index</h1>');
     });
 
     it('captures error when template is not found', () => {

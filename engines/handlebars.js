@@ -2,8 +2,6 @@
 
 const path = require('path');
 const handlebars = require('handlebars');
-const ifPage = require('../helpers/if-page');
-const unlessPage = require('../helpers/unless-page');
 const PaniniEngine = require('../lib/engine');
 
 /**
@@ -20,10 +18,6 @@ class HandlebarsEngine extends PaniniEngine {
     this.compilerOpts = {
       preventIndent: true
     };
-
-    if (this.options.builtins) {
-      this.loadBultins();
-    }
   }
 
   /**
@@ -68,16 +62,6 @@ class HandlebarsEngine extends PaniniEngine {
   }
 
   /**
-   * Load built-in helper functions.
-   */
-  loadBultins() {
-    this.engine.registerHelper('ifequal', require('../helpers/if-equal'));
-    this.engine.registerHelper('markdown', require('../helpers/markdown'));
-    this.engine.registerHelper('repeat', require('../helpers/repeat'));
-    this.engine.registerHelper('code', require('../helpers/code'));
-  }
-
-  /**
    * Render a Handlebars page and layout.
    * @param {String} pageBody - Handlebars template string.
    * @param {Object} pageData - Handlebars context.
@@ -97,10 +81,6 @@ class HandlebarsEngine extends PaniniEngine {
           throw new Error(`No layout named "${pageData.layout}" exists.`);
         }
       }
-
-      // Add special ad-hoc partials for #ifpage and #unlesspage
-      this.engine.registerHelper('ifpage', ifPage(pageData.page));
-      this.engine.registerHelper('unlesspage', unlessPage(pageData.page));
 
       // Finally, add the page as a partial called "body", and render the layout template
       this.engine.registerPartial('body', pageTemplate);
