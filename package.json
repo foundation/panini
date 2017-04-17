@@ -33,6 +33,7 @@
     "slash": "^1.0.0",
     "template-helpers": "^0.6.7",
     "through2": "^2.0.0",
+    "try-require": "^1.2.1",
     "vinyl": "^2.0.1",
     "vinyl-fs": "^2.4.4"
   },

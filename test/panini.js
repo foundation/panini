@@ -39,6 +39,13 @@ describe('Panini class', () => {
       });
       expect(p.engine).to.be.an.instanceOf(PugEngine);
     });
+
+    it('throws an error if engine is invalid', () => {
+      expect(() => new Panini({
+        input: 'src',
+        engine: 'nope'
+      })).to.throw(Error);
+    });
   });
 
   describe('getSourceStream()', () => {
