@@ -34,7 +34,7 @@ module.exports = function (src, opts, singleton) {
   }
 
   // Compile pages with the above helpers
-  const stream = inst.getSourceStream().pipe(inst.render());
+  const stream = inst.compile();
   stream._panini = inst;
   return stream;
 };

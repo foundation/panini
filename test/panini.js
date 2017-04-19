@@ -48,14 +48,6 @@ describe('Panini class', () => {
     });
   });
 
-  describe('getSourceStream()', () => {
-    it('returns a stream', () => {
-      const panini = new Panini({input: 'src'});
-      expect(panini.getSourceStream()).to.be.a.ReadableStream;
-      expect(panini.getSourceStream()).to.be.a.WritableStream;
-    });
-  });
-
   describe('getPageData()', () => {
     const p = new Panini({
       input: 'src'
@@ -123,6 +115,14 @@ describe('Panini class', () => {
         builtins: false
       });
       expect(p.getPageData(file, {})).to.not.have.property('helpers');
+    });
+  });
+
+  describe('compile()', () => {
+    it('returns a stream', () => {
+      const panini = new Panini({input: 'src'});
+      expect(panini.compile()).to.be.a.ReadableStream;
+      expect(panini.compile()).to.be.a.WritableStream;
     });
   });
 });
