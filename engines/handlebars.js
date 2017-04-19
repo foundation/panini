@@ -18,6 +18,10 @@ class HandlebarsEngine extends PaniniEngine {
     this.compilerOpts = {
       preventIndent: true
     };
+
+    this.engine.registerDecorator('block', program => {
+      console.log(program());
+    });
   }
 
   /**
@@ -34,7 +38,7 @@ class HandlebarsEngine extends PaniniEngine {
       super.setup(),
       mapFiles(this.options.input, this.options.layouts, extensions, (filePath, contents) => {
         const name = path.basename(filePath, path.extname(filePath));
-        this.layouts[name] = this.engine.compile(contents, this.compilerOpts);
+        this.layouts[name] = contents;
       }),
       mapFiles(this.options.input, this.options.partials, extensions, (filePath, contents) => {
         const name = path.relative(
@@ -69,12 +73,10 @@ class HandlebarsEngine extends PaniniEngine {
    * @returns {String} Rendered page.
    */
   render(pageBody, pageData, file) {
-    const layoutTemplate = this.layouts[pageData.layout];
+    const layout = this.layouts[pageData.layout];
 
     try {
-      const pageTemplate = this.engine.compile(pageBody + '\n');
-
-      if (!layoutTemplate) {
+      if (!layout) {
         if (pageData.layout === 'default') {
           throw new Error('You must have a layout named "default".');
         } else {
@@ -82,9 +84,10 @@ class HandlebarsEngine extends PaniniEngine {
         }
       }
 
-      // Finally, add the page as a partial called "body", and render the layout template
-      this.engine.registerPartial('body', pageTemplate);
-      return layoutTemplate(pageData);
+      const page = layout.replace(/{{> ?body ?}}/, pageBody);
+      const template = this.engine.compile(page, this.compilerOpts);
+
+      return template(pageData);
     } catch (err) {
       return this.error(err, file.path);
     }
