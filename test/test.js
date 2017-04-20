@@ -7,7 +7,7 @@ const panini = require('..');
 
 const fixtures = 'test/fixtures';
 const testFixture = (src, opts) => new Promise((resolve, reject) => {
-  panini(`${fixtures}/${src}`, assign({quiet: true}, opts), true)
+  panini.gulp(`${fixtures}/${src}`, assign({quiet: true}, opts), true)
     .once('data', data => {
       resolve(data.contents.toString());
     })
@@ -66,7 +66,7 @@ describe('Panini config', () => {
   });
 
   it('loads configuration from package.json', () => {
-    const stream = panini('src', {quiet: true}, true);
+    const stream = panini.gulp('src', {quiet: true}, true);
     expect(stream._panini.options.pages).to.equal(config.panini.pages);
   });
 });

@@ -1,9 +1,29 @@
 'use strict';
 
+const path = require('path');
 const getConfig = require('flexiconfig');
+const chalk = require('chalk');
+const watcher = require('glob-watcher');
 const Panini = require('./lib/panini');
 
 let panini;
+
+module.exports = (input, output, watch) => {
+  const panini = new Panini({input});
+  const pageRoot = path.join(process.cwd(), panini.options.input, panini.options.pages);
+  const compile = () => panini.compile(output);
+
+  panini.refresh();
+  compile();
+
+  if (watch) {
+    watcher(path.join(pageRoot, '**/*.*'), {ignoreInitial: true}, () => {
+      return compile();
+    }).on('change', filePath => {
+      console.log(`\n${chalk.cyan('❯')} ${path.relative(pageRoot, filePath)} changed.\n`);
+    });
+  }
+};
 
 /**
  * Gulp stream function that renders HTML pages. The first time the function is invoked in the stream, a new instance of Panini is created with the given options.
@@ -12,7 +32,7 @@ let panini;
  * @param {boolean} singleton - Return a new Panini instance instead of the cached one.
  * @returns {Object} Transform stream with rendered files.
  */
-module.exports = function (src, opts, singleton) {
+module.exports.gulp = function (src, opts, singleton) {
   let inst;
 
   if (!panini || singleton) {

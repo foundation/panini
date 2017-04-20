@@ -8,7 +8,7 @@ describe('render()', () => {
   let file;
 
   before(done => {
-    panini('test/fixtures/basic', {quiet: true}, true)
+    panini.gulp('test/fixtures/basic', {quiet: true}, true)
       .once('data', data => {
         file = data;
         done();
