@@ -74,6 +74,26 @@ describe('Panini class', () => {
       expect(p.getPageData(file, {kittens: true})).to.have.property('kittens', true);
     });
 
+    it('deeply merges Front Matter with global data', () => {
+      const p = new Panini({
+        input: 'src'
+      });
+      p.engine.data = {
+        kittens: {
+          one: 'one'
+        }
+      };
+      const fileData = {
+        kittens: {
+          two: 'two'
+        }
+      };
+      expect(p.getPageData(file, fileData)).to.have.property('kittens').that.eql({
+        one: 'one',
+        two: 'two'
+      });
+    });
+
     it('includes the page name', () => {
       expect(p.getPageData(file, {})).to.have.property('page', 'index');
     });
