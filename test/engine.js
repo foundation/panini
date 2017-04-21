@@ -22,7 +22,7 @@ describe('PaniniEngine', () => {
     it('stores options', () => {
       const opts = {input: 'src'};
       const e = new Engine(opts);
-      expect(e.options).to.eql(opts);
+      expect(e.options).to.have.property('input', opts.input);
     });
 
     it('creates an object for layouts if the engine supports it', () => {
@@ -37,8 +37,18 @@ describe('PaniniEngine', () => {
     class Engine extends PaniniEngine {}
 
     it('loads data', () => {
-      const e = new Engine({input: 'test/fixtures/data', data: 'data'});
+      const e = new Engine({input: 'test/fixtures/data'});
       return e.setup().then(() => expect(e.data).to.have.keys(['breakfast']));
+    });
+
+    it('stores list of locales', () => {
+      const e = new Engine({input: 'test/fixtures/locales'});
+      return e.setup().then(() => expect(e.locales).to.have.eql(['en', 'jp']));
+    });
+
+    it('loads locale data', () => {
+      const e = new Engine({input: 'test/fixtures/locales'});
+      return e.setup().then(() => expect(e.localeData).to.have.keys(['en', 'jp']));
     });
   });
 
