@@ -19,4 +19,18 @@ describe('render()', () => {
   it('changes the extension of the file to .html', () => {
     expect(path.extname(file.path)).to.equal('.html');
   });
+
+  it('applies file transforms', done => {
+    panini.gulp('test/fixtures/transforms', {
+      quiet: true,
+      transform: {
+        md: ['gulp-markdown']
+      }
+    }, true)
+      .once('data', data => {
+        expect(data.contents.toString()).to.contain('<h1');
+        done();
+      })
+      .on('error', done);
+  });
 });
