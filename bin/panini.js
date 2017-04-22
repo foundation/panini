@@ -3,7 +3,7 @@
 'use strict';
 
 const meow = require('meow');
-const panini = require('..');
+const Panini = require('..');
 
 const cli = meow(`
   Usage
@@ -24,4 +24,9 @@ if (cli.input.length < 2) {
   cli.showHelp(1);
 }
 
-panini(cli.input[0], cli.input[1], cli.flags.watch);
+const panini = new Panini(cli.input[0], cli.input[1]);
+panini.build();
+
+if (cli.flags.watch) {
+  panini.watch();
+}
