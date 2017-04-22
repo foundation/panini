@@ -18,10 +18,6 @@ class HandlebarsEngine extends PaniniEngine {
     this.compilerOpts = {
       preventIndent: true
     };
-
-    this.engine.registerDecorator('block', program => {
-      console.log(program());
-    });
   }
 
   /**
