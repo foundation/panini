@@ -2,6 +2,7 @@
 
 const path = require('path');
 const handlebars = require('handlebars');
+const handlebarsHelpers = require('handlebars-helpers');
 const PaniniEngine = require('../lib/engine');
 
 /**
@@ -18,6 +19,12 @@ class HandlebarsEngine extends PaniniEngine {
     this.compilerOpts = {
       preventIndent: true
     };
+
+    if (this.options.builtins) {
+      handlebarsHelpers({
+        handlebars: this.engine
+      });
+    }
   }
 
   /**

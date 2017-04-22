@@ -127,7 +127,7 @@ describe('Panini class', () => {
     });
 
     it('includes template helpers', () => {
-      expect(p.getPageData(file, {})).to.have.property('helpers').that.is.an('object');
+      expect(p.getPageData(file, {})).to.have.property('currentPage').that.is.a('function');
     });
 
     it('can omit template helpers', () => {
@@ -135,7 +135,7 @@ describe('Panini class', () => {
         input: 'src',
         builtins: false
       });
-      expect(p.getPageData(file, {})).to.not.have.property('helpers');
+      expect(p.getPageData(file, {})).to.not.have.property('currentPage');
     });
   });
 

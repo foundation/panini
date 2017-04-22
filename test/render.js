@@ -2,13 +2,13 @@
 
 const path = require('path');
 const expect = require('chai').expect;
-const panini = require('..');
+const panini = require('../gulp');
 
 describe('render()', () => {
   let file;
 
   before(done => {
-    panini.gulp('test/fixtures/basic', {quiet: true}, true)
+    panini.create()('test/fixtures/basic', {quiet: true})
       .once('data', data => {
         file = data;
         done();
@@ -21,12 +21,12 @@ describe('render()', () => {
   });
 
   it('applies file transforms', done => {
-    panini.gulp('test/fixtures/transforms', {
+    panini.create()('test/fixtures/transforms', {
       quiet: true,
       transform: {
         md: ['gulp-markdown']
       }
-    }, true)
+    })
       .once('data', data => {
         expect(data.contents.toString()).to.contain('<h1');
         done();

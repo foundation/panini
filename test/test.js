@@ -3,11 +3,11 @@
 const expect = require('chai').expect;
 const assign = require('lodash.assign');
 const snapshot = require('snap-shot');
-const panini = require('..');
+const panini = require('../gulp');
 
 const fixtures = 'test/fixtures';
 const testFixture = (src, opts) => new Promise((resolve, reject) => {
-  panini.gulp(`${fixtures}/${src}`, assign({quiet: true}, opts), true)
+  panini.create()(`${fixtures}/${src}`, assign({quiet: true}, opts))
     .once('data', data => {
       resolve(data.contents.toString());
     })
@@ -66,7 +66,7 @@ describe('Panini config', () => {
   });
 
   it('loads configuration from package.json', () => {
-    const stream = panini.gulp('src', {quiet: true}, true);
+    const stream = panini.create()('src');
     expect(stream._panini.options.pages).to.equal(config.panini.pages);
   });
 });
