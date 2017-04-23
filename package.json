@@ -30,6 +30,7 @@
     "lodash.frompairs": "^4.0.1",
     "marked": "^0.3.6",
     "meow": "^3.7.0",
+    "merge-stream": "^1.0.1",
     "ora": "^1.1.0",
     "path-insert": "^1.0.0",
     "path-prefix": "^1.0.0",

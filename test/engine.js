@@ -1,11 +1,17 @@
 'use strict';
 
 const path = require('path');
-const expect = require('chai').expect;
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+const sinon = require('sinon');
 const File = require('vinyl');
+const marked = require('marked');
 const PaniniEngine = require('../lib/engine');
 const HandlebarsEngine = require('../engines/handlebars');
 const PugEngine = require('../engines/pug');
+
+chai.use(sinonChai);
+const expect = chai.expect;
 
 describe('PaniniEngine', () => {
   describe('constructor()', () => {
@@ -49,6 +55,106 @@ describe('PaniniEngine', () => {
     it('loads locale data', () => {
       const e = new Engine({input: 'test/fixtures/locales'});
       return e.setup().then(() => expect(e.localeData).to.have.keys(['en', 'jp']));
+    });
+
+    it('loads collection configs', () => {
+      const e = new Engine({input: 'test/fixtures/collections'});
+      return e.setup().then(() =>
+        expect(e.collections).to.have.property('blog-posts').with.keys(['input', 'output', 'transform', 'template'])
+      );
+    });
+  });
+
+  describe('buildCollections()', () => {
+    class Engine extends PaniniEngine {}
+    const e = new Engine({input: 'test/fixtures/collections'});
+    e.collections = {
+      posts: {}
+    };
+
+    before(() => {
+      sinon.stub(e, 'buildCollection');
+    });
+
+    after(() => {
+      e.buildCollection.restore();
+    });
+
+    it('calls buildCollection() once for each collection config stored', () => {
+      return e.buildCollections().then(() => {
+        expect(e.buildCollection).to.have.been.calledOnce;
+      });
+    });
+  });
+
+  describe('buildCollection()', () => {
+    class Engine extends PaniniEngine {}
+    const e = new Engine({input: 'test/fixtures/collections'});
+    let file;
+    e.collections = {
+      'blog-posts': {
+        input: 'blog-posts/*.md',
+        output: 'posts',
+        transform: (filePath, contents) => {
+          return {
+            name: path.basename(filePath),
+            data: {
+              body: marked(contents)
+            }
+          };
+        },
+        template: Buffer.from('{{body}}')
+      }
+    };
+
+    before(() => {
+      return e.buildCollection('blog-posts').then(() => {
+        file = e.collectionPages['blog-posts'][0];
+      });
+    });
+
+    it('stores a series of pages in an array', () => {
+      expect(e.collectionPages).to.have.property('blog-posts').that.is.an('array');
+    });
+
+    it('stores pages as Vinyl files', () => {
+      expect(file).to.be.an.instanceOf(File);
+    });
+
+    it('inserts collection template as the contents of the file', () => {
+      expect(file.contents.toString()).to.contain('{{body}}');
+    });
+
+    it('attaches data from transform function onto file', () => {
+      expect(file.data).to.be.an('object').with.keys(['body']);
+    });
+
+    it('sets filename of file based on return value of transform function', () => {
+      expect(file.path).to.equal(
+        path.join(process.cwd(), 'test/fixtures/collections/pages/posts/one.html')
+      );
+    });
+
+    it('works with directories', () => {
+      const e = new Engine({input: 'test/fixtures/collections'});
+      e.collections = {
+        'blog-posts': {
+          input: 'blog-posts/',
+          output: 'posts',
+          transform: filePath => {
+            return {
+              name: path.basename(filePath),
+              data: {}
+            };
+          },
+          template: Buffer.from('{{body}}')
+        }
+      };
+
+      return e.buildCollection('blog-posts').then(() => {
+        const file = e.collectionPages['blog-posts'][0];
+        expect(file.path).to.equal(path.join(process.cwd(), 'test/fixtures/collections/pages/posts/blog-posts.html'));
+      });
     });
   });
 
@@ -100,7 +206,8 @@ describe('HandlebarsEngine', () => {
     layouts: 'layouts',
     partials: 'partials',
     data: 'data',
-    helpers: 'helpers'
+    helpers: 'helpers',
+    collections: 'collections'
   });
 
   describe('constructor()', () => {
@@ -179,7 +286,8 @@ describe('PugEngine', () => {
   const options = input => ({
     input,
     filters: 'filters',
-    data: 'data'
+    data: 'data',
+    collections: 'collections'
   });
 
   describe('constructor()', () => {
