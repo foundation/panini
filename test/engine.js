@@ -9,6 +9,7 @@ const marked = require('marked');
 const PaniniEngine = require('../lib/engine');
 const HandlebarsEngine = require('../engines/handlebars');
 const PugEngine = require('../engines/pug');
+const EjsEngine = require('../engines/ejs');
 
 chai.use(sinonChai);
 const expect = chai.expect;
@@ -336,6 +337,37 @@ describe('PugEngine', () => {
     it('renders filters', () => {
       const page = ':filter\n  hello';
       expect(e.render(page, data, file)).to.contain('HELLO');
+    });
+  });
+});
+
+describe('EjsEngine', () => {
+  describe('constructor()', () => {
+    it('creates a new instance of PugEngine', () => {
+      expect(new EjsEngine()).to.be.an.instanceOf(EjsEngine);
+    });
+  });
+
+  describe('render', () => {
+    const file = new File({
+      base: path.join(process.cwd(), 'test/fixtures/ejs/pages'),
+      path: path.join(process.cwd(), 'test/fixtures/ejs/pages/index.ejs')
+    });
+    const e = new EjsEngine({input: 'test/fixtures/ejs'});
+    const data = {
+      page: 'index'
+    };
+
+    it('renders an EJS template', () => {
+      expect(e.render('<%= page %>', data, file)).to.contain('index');
+    });
+
+    it('correctly sets up relative includes', () => {
+      expect(e.render('<%- include("../includes/include") %>', data, file)).to.contain('Hello world.');
+    });
+
+    it('correctly sets up absolute includes', () => {
+      expect(e.render('<%- include("/includes/include") %>', data, file)).to.contain('Hello world.');
     });
   });
 });
