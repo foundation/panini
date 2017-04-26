@@ -52,7 +52,7 @@ module.exports = class {
     watcher(path.join(pageRoot, '**/*.*'), {ignoreInitial: true}, () => {
       return this.build();
     }).on('change', filePath => {
-      if (!this.options.quiet) {
+      if (!this.panini.options.quiet) {
         console.log(`\n${chalk.cyan('❯')} ${path.relative(pageRoot, filePath)} changed.\n`);
       }
     });
