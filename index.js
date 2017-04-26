@@ -52,7 +52,9 @@ module.exports = class {
     watcher(path.join(pageRoot, '**/*.*'), {ignoreInitial: true}, () => {
       return this.build();
     }).on('change', filePath => {
-      console.log(`\n${chalk.cyan('❯')} ${path.relative(pageRoot, filePath)} changed.\n`);
+      if (!this.options.quiet) {
+        console.log(`\n${chalk.cyan('❯')} ${path.relative(pageRoot, filePath)} changed.\n`);
+      }
     });
 
     return this;
