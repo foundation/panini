@@ -1,6 +1,6 @@
 # Panini
 
-[![Build Status](https://travis-ci.org/zurb/panini.svg?branch=master)](https://travis-ci.org/zurb/panini) [![npm version](https://badge.fury.io/js/panini.svg)](https://badge.fury.io/js/panini) [![Coverage Status](https://coveralls.io/repos/zurb/panini/badge.svg?branch=master&service=github)](https://coveralls.io/github/zurb/panini?branch=master) [![Dependency Status](https://david-dm.org/zurb/panini.svg)](https://david-dm.org/zurb/panini)
+[![Build Status](https://travis-ci.org/zurb/panini.svg?branch=master)](https://travis-ci.org/zurb/panini) [![npm version](https://badge.fury.io/js/panini.svg)](https://badge.fury.io/js/panini) [![Dependency Status](https://david-dm.org/zurb/panini.svg)](https://david-dm.org/zurb/panini)
 
 A super simple flat file generator for use with Gulp. It compiles a series of HTML **pages** using a common **layout**. These pages can also include HTML **partials**, external Handlebars **helpers**, or external **data** as JSON or YAML.
 
