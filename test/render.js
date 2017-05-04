@@ -24,7 +24,7 @@ describe('render()', () => {
     panini.create()('test/fixtures/transforms', {
       quiet: true,
       transform: {
-        md: ['gulp-markdown']
+        '.md': ['gulp-markdown']
       }
     })
       .once('data', data => {
