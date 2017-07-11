@@ -142,12 +142,12 @@ Lastly, the reserved `page` variable is added to every page template as it rende
 You can also use panini via the CLI.
 
 ```
-Usage: panini --layouts=[layoutdir] --root=[rootdir] --dest=[destdir] [other options] 'pagesglob'
+Usage: panini --layouts=[layoutdir] --root=[rootdir] --output=[destdir] [other options] 'pagesglob'
 
 Options:
   --layouts  (required) path to a folder containing layouts
   --root     (required) path to the root folder all pages live in
-  --dest     (required) path to the folder compiled pages should get sent to
+  --output     (required) path to the folder compiled pages should get sent to
   --partials            path to root folder for partials
   --helpers             path to folder for additional helpers
   --data                path to folder for additional data
