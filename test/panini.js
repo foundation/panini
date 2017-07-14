@@ -137,6 +137,10 @@ describe('Panini class', () => {
       });
       expect(p.getPageData(file, {})).to.not.have.property('currentPage');
     });
+
+    it('inserts a parsing error for later use', () => {
+      expect(p.getPageData(file, {}, 'error')).to.have.property('_paniniError', 'error');
+    });
   });
 
   describe('compile()', () => {

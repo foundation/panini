@@ -33,4 +33,15 @@ describe('render()', () => {
       })
       .on('error', done);
   });
+
+  it('catches Yaml errors', done => {
+    panini.create()('test/fixtures/yaml-error', {
+      quiet: true
+    })
+      .once('data', data => {
+        expect(data.contents.toString()).to.contain('<!-- __PANINI_ERROR__ -->');
+        done();
+      })
+      .on('error', done);
+  });
 });
