@@ -36,6 +36,7 @@
     "pify": "^2.3.0",
     "replace-ext": "^1.0.0",
     "slash": "^1.0.0",
+    "strip-bom": "^3.0.0",
     "template-helpers": "^0.6.7",
     "through2": "^2.0.0",
     "try-require": "^1.2.1",
