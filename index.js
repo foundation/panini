@@ -26,6 +26,11 @@ module.exports = class {
     }
 
     this.panini = new Panini(assign(options, {input}));
+
+    if (!this.panini.initialized) {
+      throw new Error();
+    }
+
     this.panini.refresh();
     this.output = output;
   }

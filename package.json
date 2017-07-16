@@ -25,6 +25,7 @@
     "handlebars": "^4.0.5",
     "handlebars-helpers": "^0.8.2",
     "highlight.js": "^8.9.1",
+    "is-empty-object": "^1.1.1",
     "load-whatever": "^0.2.0",
     "lodash.assign": "^4.2.0",
     "lodash.frompairs": "^4.0.1",

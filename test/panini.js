@@ -3,12 +3,15 @@
 const path = require('path');
 const chai = require('chai');
 const chaiStream = require('chai-stream-es6').default;
+const sinon = require('sinon');
 const File = require('vinyl');
 const tempy = require('tempy');
-const Panini = require('..').Panini;
+const PaniniWrapper = require('..');
 const PugEngine = require('../engines/pug');
 
+const Panini = PaniniWrapper.Panini;
 const expect = chai.expect;
+
 chai.use(chaiStream);
 
 describe('Panini class', () => {
@@ -29,10 +32,6 @@ describe('Panini class', () => {
       expect(panini.options).to.have.property('input', 'src');
     });
 
-    it('throws an error if no input option is set', () => {
-      expect(() => new Panini()).to.throw(Error);
-    });
-
     it('allows the engine to be changed', () => {
       const p = new Panini({
         input: 'src',
@@ -40,10 +39,19 @@ describe('Panini class', () => {
       });
       expect(p.engine).to.be.an.instanceOf(PugEngine);
     });
+  });
 
-    it('throws an error if engine is invalid', () => {
-      expect(() => new Panini({
-        input: 'src',
+  describe('Config errors', () => {
+    before(() => sinon.stub(console, 'error'));
+
+    after(() => console.error.restore());
+
+    it('throws an error if no input directory is set', () => {
+      expect(() => new PaniniWrapper()).to.throw(Error);
+    });
+
+    it(`throws an error if an incorrect engine is set`, () => {
+      expect(() => new PaniniWrapper('src', 'dest', {
         engine: 'nope'
       })).to.throw(Error);
     });
