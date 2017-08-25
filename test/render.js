@@ -20,8 +20,8 @@ describe('render()', () => {
     expect(path.extname(file.path)).to.equal('.html');
   });
 
-  it('applies file transforms', done => {
-    panini.create()('test/fixtures/transforms', {
+  it('applies pre-render transforms', done => {
+    panini.create()('test/fixtures/transforms-pre', {
       quiet: true,
       transform: {
         '.md': ['gulp-markdown']
@@ -29,6 +29,22 @@ describe('render()', () => {
     })
       .once('data', data => {
         expect(data.contents.toString()).to.contain('<h1');
+        done();
+      })
+      .on('error', done);
+  });
+
+  it('applies post-render transforms', done => {
+    panini.create()('test/fixtures/transforms-post', {
+      quiet: true,
+      transform: {
+        '.hbs': {
+          after: ['gulp-striphtml']
+        }
+      }
+    })
+      .once('data', data => {
+        expect(data.contents.toString()).to.not.contain('<h1>');
         done();
       })
       .on('error', done);
