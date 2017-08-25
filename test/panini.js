@@ -42,9 +42,9 @@ describe('Panini class', () => {
   });
 
   describe('Config errors', () => {
-    before(() => sinon.stub(console, 'error'));
+    before(() => sinon.stub(console, 'log'));
 
-    after(() => console.error.restore());
+    after(() => console.log.restore());
 
     it('throws an error if no input directory is set', () => {
       expect(() => new PaniniWrapper()).to.throw(Error);
