@@ -42,6 +42,36 @@ describe('get-transforms()', () => {
       '.hbs': transform
     };
 
-    expect(getTransforms(filePath, config, baseDir)).to.eql(transform);
+    expect(getTransforms(filePath, config)).to.eql(transform);
+  });
+
+  it('finds a transform marked as "before"', () => {
+    const config = {
+      '.hbs': {
+        before: transform
+      }
+    };
+
+    expect(getTransforms(filePath, config)).to.eql(transform);
+  });
+
+  it('skips a transform marked as "after"', () => {
+    const config = {
+      '.hbs': {
+        after: transform
+      }
+    };
+
+    expect(getTransforms(filePath, config)).to.be.null;
+  });
+
+  it('finds a transform marked as "after"', () => {
+    const config = {
+      '.hbs': {
+        after: transform
+      }
+    };
+
+    expect(getTransforms(filePath, config, 'after')).to.eql(transform);
   });
 });
