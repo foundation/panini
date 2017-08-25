@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const handlebars = require('handlebars');
 const handlebarsHelpers = require('handlebars-helpers');
 const PaniniEngine = require('../lib/engine');
 
@@ -15,6 +14,8 @@ class HandlebarsEngine extends PaniniEngine {
    */
   constructor(options) {
     super(options);
+
+    const handlebars = require('handlebars');
     this.engine = handlebars.create();
     this.compilerOpts = {
       preventIndent: true
@@ -98,5 +99,7 @@ class HandlebarsEngine extends PaniniEngine {
 }
 
 HandlebarsEngine.features = ['layouts', 'partials', 'helpers'];
+
+HandlebarsEngine.requires = 'handlebars';
 
 module.exports = HandlebarsEngine;

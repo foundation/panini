@@ -1,13 +1,18 @@
 'use strict';
 
 const path = require('path');
-const pug = require('pug');
 const PaniniEngine = require('../lib/engine');
 
 /**
  * Panini engine to render Handlebars templates.
  */
 class PugEngine extends PaniniEngine {
+  constructor() {
+    super();
+
+    this.pug = require('pug');
+  }
+
   /**
    * Load layouts, partials, helpers, and data.
    * @returns {Promise} Promise which resolves when setup is done.
@@ -41,7 +46,7 @@ class PugEngine extends PaniniEngine {
    */
   render(pageBody, pageData, file) {
     try {
-      const template = pug.compile(pageBody, {
+      const template = this.pug.compile(pageBody, {
         filename: file.path,
         basedir: this.options.input,
         filters: this.filters
@@ -54,5 +59,7 @@ class PugEngine extends PaniniEngine {
 }
 
 PugEngine.features = ['filters'];
+
+PugEngine.requires = 'pug';
 
 module.exports = PugEngine;

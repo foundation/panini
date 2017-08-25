@@ -1,12 +1,17 @@
 'use strict';
 
-const ejs = require('ejs');
 const PaniniEngine = require('../lib/engine');
 
 /**
  * Panini engine to render Handlebars templates.
  */
 class EjsEngine extends PaniniEngine {
+  constructor() {
+    super();
+
+    this.ejs = require('ejs');
+  }
+
   /**
    * Render a Handlebars page and layout.
    * @param {String} pageBody - Handlebars template string.
@@ -16,7 +21,7 @@ class EjsEngine extends PaniniEngine {
    */
   render(pageBody, pageData, file) {
     try {
-      return ejs.render(pageBody, pageData, {
+      return this.ejs.render(pageBody, pageData, {
         filename: file.path,
         root: this.options.input
       });
@@ -27,5 +32,7 @@ class EjsEngine extends PaniniEngine {
 }
 
 EjsEngine.features = [];
+
+EjsEngine.requires = 'ejs';
 
 module.exports = EjsEngine;
