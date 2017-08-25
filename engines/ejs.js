@@ -6,8 +6,8 @@ const PaniniEngine = require('../lib/engine');
  * Panini engine to render Handlebars templates.
  */
 class EjsEngine extends PaniniEngine {
-  constructor() {
-    super();
+  constructor(options) {
+    super(options);
 
     this.ejs = require('ejs');
   }

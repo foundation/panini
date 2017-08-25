@@ -7,8 +7,8 @@ const PaniniEngine = require('../lib/engine');
  * Panini engine to render Handlebars templates.
  */
 class PugEngine extends PaniniEngine {
-  constructor() {
-    super();
+  constructor(options) {
+    super(options);
 
     this.pug = require('pug');
   }
