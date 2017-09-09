@@ -2,6 +2,7 @@
 
 const path = require('path');
 const PaniniEngine = require('../lib/engine');
+const folders = require('../lib/folders');
 
 /**
  * Panini engine to render Handlebars templates.
@@ -23,7 +24,7 @@ class PugEngine extends PaniniEngine {
 
     return Promise.all([
       super.setup(),
-      mapPaths(this.options.input, this.options.filters, '**/*.js', filePath => {
+      mapPaths(this.options.input, folders.filters, '**/*.js', filePath => {
         const name = path.basename(filePath, '.js');
 
         try {

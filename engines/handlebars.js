@@ -3,6 +3,7 @@
 const path = require('path');
 const handlebarsHelpers = require('handlebars-helpers');
 const PaniniEngine = require('../lib/engine');
+const folders = require('../lib/folders');
 
 /**
  * Panini engine to render Handlebars templates.
@@ -40,18 +41,18 @@ class HandlebarsEngine extends PaniniEngine {
 
     return Promise.all([
       super.setup(),
-      mapFiles(this.options.input, this.options.layouts, extensions, (filePath, contents) => {
+      mapFiles(this.options.input, folders.layouts, extensions, (filePath, contents) => {
         const name = path.basename(filePath, path.extname(filePath));
         this.layouts[name] = contents;
       }),
-      mapFiles(this.options.input, this.options.partials, '**/*.*', (filePath, contents) => {
+      mapFiles(this.options.input, folders.partials, '**/*.*', (filePath, contents) => {
         const name = path.relative(
-          path.join(process.cwd(), this.options.input, this.options.partials),
+          path.join(process.cwd(), this.options.input, folders.partials),
           filePath
         ).replace(/\..*$/, '');
         this.engine.registerPartial(name, contents + '\n');
       }),
-      mapPaths(this.options.input, this.options.helpers, '**/*.js', filePath => {
+      mapPaths(this.options.input, folders.helpers, '**/*.js', filePath => {
         const name = path.basename(filePath, '.js');
 
         try {
