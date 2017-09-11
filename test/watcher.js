@@ -29,11 +29,11 @@ describe('watcher()', () => {
     fs.writeFileSync(path.join(tempDir, 'index.html'), 'test');
     const update = sinon.spy();
     const rule = {
-      pattern: path.join(tempDir, '*.*'),
+      pattern: '*.*',
       update,
       remove: () => {}
     };
-    w = watcher(rule);
+    w = watcher(rule, tempDir);
     w.on('ready', () => {
       expect(update).to.have.been.calledOnce;
       done();
@@ -45,11 +45,11 @@ describe('watcher()', () => {
     fs.writeFileSync(filePath, 'test');
     const update = sinon.spy();
     const rule = {
-      pattern: path.join(tempDir, '*.*'),
+      pattern: '*.*',
       update,
       remove: () => {}
     };
-    w = watcher(rule);
+    w = watcher(rule, tempDir);
     w.on('ready', () => {
       expect(update).to.have.been.calledWithExactly(filePath, 'test');
       done();
@@ -61,11 +61,11 @@ describe('watcher()', () => {
     fs.writeFileSync(filePath, 'test');
     const update = sinon.spy();
     const rule = {
-      pattern: path.join(tempDir, '*.*'),
+      pattern: '*.*',
       update,
       remove: () => {}
     };
-    w = watcher(rule);
+    w = watcher(rule, tempDir);
     w.on('ready', () => {
       fs.writeFileSync(filePath, 'tested');
 
@@ -82,11 +82,11 @@ describe('watcher()', () => {
     fs.writeFileSync(filePathA, 'test');
     const update = sinon.spy();
     const rule = {
-      pattern: path.join(tempDir, '*.*'),
+      pattern: '*.*',
       update,
       remove: () => {}
     };
-    w = watcher(rule);
+    w = watcher(rule, tempDir);
     w.on('ready', () => {
       fs.writeFileSync(filePathB, 'test');
 
@@ -103,11 +103,11 @@ describe('watcher()', () => {
     fs.writeFileSync(filePath, 'test');
     const remove = sinon.spy();
     const rule = {
-      pattern: path.join(tempDir, '*.*'),
+      pattern: '*.*',
       update: () => {},
       remove
     };
-    w = watcher(rule);
+    w = watcher(rule, tempDir);
     w.on('ready', () => {
       fs.unlinkSync(filePath);
 
@@ -123,12 +123,12 @@ describe('watcher()', () => {
     fs.writeFileSync(filePath, 'test');
     const update = sinon.spy();
     const rule = {
-      pattern: path.join(tempDir, '*.*'),
+      pattern: '*.*',
       read: false,
       update,
       remove: () => {}
     };
-    w = watcher(rule);
+    w = watcher(rule, tempDir);
     w.on('ready', () => {
       expect(update).to.have.been.calledWithExactly(filePath, undefined);
       done();
@@ -140,13 +140,13 @@ describe('watcher()', () => {
     fs.writeFileSync(filePath, 'test');
     const spy = sinon.spy();
     const rule = {
-      pattern: path.join(tempDir, '*.*'),
+      pattern: '*.*',
       update() {
         spy(this);
       },
       remove: () => {}
     };
-    w = watcher(rule, 'this');
+    w = watcher(rule, tempDir, 'this');
     w.on('ready', () => {
       expect(spy).to.have.been.calledWithExactly('this');
       done();
