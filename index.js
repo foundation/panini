@@ -16,6 +16,7 @@ module.exports = class {
    * @param {String} input - Input directory.
    * @param {String} output - Output directory.
    * @param {Object} [opts] - Panini configuration. Overrides any configuration in `package.json`.
+   * @todo Move flexiconfig to core Panini class
    */
   constructor(input, output, opts) {
     let options;
@@ -50,6 +51,7 @@ module.exports = class {
   /**
    * Enable file watching. Adding or changing assets in your project will trigger a re-compile of the entire site.
    * @returns {Object} Self.
+   * @todo Add callback support.
    */
   watch() {
     const pageRoot = path.join(process.cwd(), this.panini.options.input, this.panini.options.pages);

@@ -17,6 +17,7 @@ class PugEngine extends PaniniEngine {
   /**
    * Load layouts, partials, helpers, and data.
    * @returns {Promise} Promise which resolves when setup is done.
+   * @todo Load helpers from a `helpers/` folder and merge with data context.
    */
   setup() {
     const mapPaths = PaniniEngine.mapPaths;

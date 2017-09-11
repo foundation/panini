@@ -4,6 +4,7 @@ const PaniniEngine = require('../lib/engine');
 
 /**
  * Panini engine to render Handlebars templates.
+ * @todo Load helpers from a `helpers/` folder and merge with data context.
  */
 class EjsEngine extends PaniniEngine {
   constructor(options) {
