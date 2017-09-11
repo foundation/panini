@@ -40,7 +40,7 @@ describe('watcher()', () => {
     });
   });
 
-  it('calls the update function with a file path and contents', done => {
+  it('calls the update function with a name, file path and contents', done => {
     const filePath = path.join(tempDir, 'index.html');
     fs.writeFileSync(filePath, 'test');
     const update = sinon.spy();
@@ -51,7 +51,7 @@ describe('watcher()', () => {
     };
     w = watcher(rule, tempDir);
     w.on('ready', () => {
-      expect(update).to.have.been.calledWithExactly(filePath, 'test');
+      expect(update).to.have.been.calledWithExactly('index', filePath, 'test');
       done();
     });
   });
@@ -112,7 +112,7 @@ describe('watcher()', () => {
       fs.unlinkSync(filePath);
 
       w.on('unlink', () => {
-        expect(remove).to.have.been.calledWithExactly(filePath, undefined);
+        expect(remove).to.have.been.calledWithExactly('index', filePath, undefined);
         done();
       });
     });
@@ -130,7 +130,7 @@ describe('watcher()', () => {
     };
     w = watcher(rule, tempDir);
     w.on('ready', () => {
-      expect(update).to.have.been.calledWithExactly(filePath, undefined);
+      expect(update).to.have.been.calledWithExactly('index', filePath, undefined);
       done();
     });
   });
