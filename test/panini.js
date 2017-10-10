@@ -135,6 +135,18 @@ describe('Panini class', () => {
       expect(p.getPageData(file, {})).to.have.property('layout', 'about');
     });
 
+    it('assigns a layout based on subfolder', () => {
+      const p = new Panini({
+        input: 'src',
+        pageLayouts: {'about/sub': 'about'}
+      });
+      const file = new File({
+        base: path.join(process.cwd(), 'src/pages'),
+        path: path.join(process.cwd(), 'src/pages/about/sub/index.hbs')
+      });
+      expect(p.getPageData(file, {})).to.have.property('layout', 'about');
+    });
+
     it('assigns an empty root prefix for pages at the root', () => {
       expect(p.getPageData(file, {})).to.have.property('root', '');
     });

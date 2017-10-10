@@ -29,6 +29,7 @@
     "load-whatever": "^0.2.0",
     "lodash.frompairs": "^4.0.1",
     "marked": "^0.3.6",
+    "match-specific-path": "^1.0.0",
     "meow": "^3.7.0",
     "ora": "^1.1.0",
     "path-insert": "^1.0.0",
