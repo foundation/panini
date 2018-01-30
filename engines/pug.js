@@ -24,7 +24,6 @@ class PugEngine extends PaniniEngine {
     this.filters = {};
 
     return Promise.all([
-      super.setup(),
       mapPaths(this.options.input, folders.filters, '**/*.js', filePath => {
         const name = path.basename(filePath, '.js');
 

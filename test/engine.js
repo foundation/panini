@@ -40,32 +40,6 @@ describe('PaniniEngine', () => {
     });
   });
 
-  describe('setup()', () => {
-    class Engine extends PaniniEngine {}
-
-    it('loads data', () => {
-      const e = new Engine({input: 'test/fixtures/data'});
-      return e.setup().then(() => expect(e.data).to.have.keys(['breakfast']));
-    });
-
-    it('stores list of locales', () => {
-      const e = new Engine({input: 'test/fixtures/locales'});
-      return e.setup().then(() => expect(e.locales).to.have.eql(['en', 'jp']));
-    });
-
-    it('loads locale data', () => {
-      const e = new Engine({input: 'test/fixtures/locales'});
-      return e.setup().then(() => expect(e.localeData).to.have.keys(['en', 'jp']));
-    });
-
-    it('loads collection configs', () => {
-      const e = new Engine({input: 'test/fixtures/collections'});
-      return e.setup().then(() =>
-        expect(e.collections).to.have.property('blog-posts').with.keys(['input', 'output', 'transform', 'template'])
-      );
-    });
-  });
-
   describe('buildCollections()', () => {
     class Engine extends PaniniEngine {}
     const e = new Engine({input: 'test/fixtures/collections'});
@@ -237,11 +211,6 @@ describe('HandlebarsEngine', () => {
       const e = new HandlebarsEngine(options('test/fixtures/helpers'));
       return e.setup().then(() => expect(e.engine.helpers).to.contain.keys(['helper']));
     });
-
-    it('loads data', () => {
-      const e = new HandlebarsEngine(options('test/fixtures/data'));
-      return e.setup().then(() => expect(e.data).to.have.keys(['breakfast']));
-    });
   });
 
   describe('render()', () => {
@@ -298,11 +267,6 @@ describe('PugEngine', () => {
   });
 
   describe('setup()', () => {
-    it('loads data', () => {
-      const e = new PugEngine(options('test/fixtures/pug'));
-      return e.setup().then(() => expect(e.data).to.have.keys(['data']));
-    });
-
     it('loads filters', () => {
       const e = new PugEngine(options('test/fixtures/pug'));
       return e.setup().then(() => expect(e.filters).to.have.keys(['filter']));

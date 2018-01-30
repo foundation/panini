@@ -18,7 +18,7 @@ const create = () => {
   return (src, opts) => {
     if (!panini) {
       panini = new Panini(src, null, opts).panini;
-      panini.refresh();
+      panini.setup();
     }
 
     const stream = panini.compile();

@@ -57,6 +57,38 @@ describe('Panini class', () => {
     });
   });
 
+  describe('setup()', () => {
+    it('loads data', () => {
+      const p = new Panini({
+        input: 'test/fixtures/data'
+      });
+      return p.setup().then(() => expect(p.engine.data).to.have.keys(['breakfast']));
+    });
+
+    it('stores list of locales', () => {
+      const p = new Panini({
+        input: 'test/fixtures/locales'
+      });
+      return p.setup().then(() => expect(p.engine.locales).to.have.eql(['en', 'jp']));
+    });
+
+    it('loads locale data', () => {
+      const p = new Panini({
+        input: 'test/fixtures/locales'
+      });
+      return p.setup().then(() => expect(p.engine.localeData).to.have.keys(['en', 'jp']));
+    });
+
+    it('loads collection configs', () => {
+      const p = new Panini({
+        input: 'test/fixtures/collections'
+      });
+      return p.setup().then(() =>
+        expect(p.engine.collections).to.have.property('blog-posts').with.keys(['input', 'output', 'transform', 'template'])
+      );
+    });
+  });
+
   describe('getPageData()', () => {
     const p = new Panini({
       input: 'src'

@@ -32,7 +32,7 @@ module.exports = class {
       throw new Error();
     }
 
-    this.panini.refresh();
+    this.panini.setup();
     this.output = output;
   }
 

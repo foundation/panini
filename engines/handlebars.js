@@ -40,7 +40,6 @@ class HandlebarsEngine extends PaniniEngine {
     this.layouts = {};
 
     return Promise.all([
-      super.setup(),
       mapFiles(this.options.input, folders.layouts, extensions, (filePath, contents) => {
         const name = path.basename(filePath, path.extname(filePath));
         this.layouts[name] = contents;
