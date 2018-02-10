@@ -12,12 +12,12 @@ const create = () => {
   /**
    * Compile a Panini project located at `src`.
    * @param {String} src - Input folder.
-   * @param {Object} [opts] - Panini options. These will override any settings in `package.json`.
+   * @param {Object} [options] - Panini options. These will override any settings in `package.json`.
    * @returns {Object} Stream compile function.
    */
-  return (src, opts) => {
+  return (src, options) => {
     if (!panini) {
-      panini = new Panini(src, null, opts).panini;
+      panini = new Panini(src, null, options).panini;
       panini.setup();
     }
 

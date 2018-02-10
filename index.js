@@ -1,10 +1,8 @@
 'use strict';
 
 const path = require('path');
-const getConfig = require('flexiconfig');
 const chalk = require('chalk');
 const watcher = require('glob-watcher');
-const assign = require('lodash.assign');
 const Panini = require('./lib/panini');
 
 /**
@@ -15,18 +13,11 @@ module.exports = class {
    * Initialize Panini.
    * @param {String} input - Input directory.
    * @param {String} output - Output directory.
-   * @param {Object} [opts] - Panini configuration. Overrides any configuration in `package.json`.
+   * @param {Object} [options] - Panini configuration. Overrides any configuration in `package.json`.
    * @todo Move flexiconfig to core Panini class
    */
-  constructor(input, output, opts) {
-    let options;
-    try {
-      options = getConfig([opts, 'package.json#panini']);
-    } catch (err) {
-      options = {};
-    }
-
-    this.panini = new Panini(assign(options, {input}));
+  constructor(input, output, options) {
+    this.panini = new Panini(input, options);
 
     if (!this.panini.initialized) {
       throw new Error();
