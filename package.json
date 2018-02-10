@@ -27,7 +27,6 @@
     "highlight.js": "^8.9.1",
     "is-empty-object": "^1.1.1",
     "load-whatever": "^0.2.0",
-    "lodash.assign": "^4.2.0",
     "lodash.frompairs": "^4.0.1",
     "marked": "^0.3.6",
     "meow": "^3.7.0",
@@ -65,7 +64,6 @@
     "sinon-chai": "^2.9.0",
     "snap-shot": "^2.17.0",
     "tempy": "^0.1.0",
-    "vinyl-fs": "^2.3.1",
     "xo": "^0.18.1"
   },
   "repository": {

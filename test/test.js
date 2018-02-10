@@ -1,13 +1,12 @@
 'use strict';
 
 const expect = require('chai').expect;
-const assign = require('lodash.assign');
 const snapshot = require('snap-shot');
 const panini = require('../gulp');
 
 const fixtures = 'test/fixtures';
 const testFixture = (src, opts) => new Promise((resolve, reject) => {
-  panini.create()(`${fixtures}/${src}`, assign({quiet: true}, opts))
+  panini.create()(`${fixtures}/${src}`, Object.assign({quiet: true}, opts))
     .once('data', data => {
       resolve(data.contents.toString());
     })
