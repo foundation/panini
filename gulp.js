@@ -1,6 +1,6 @@
 'use strict';
 
-const Panini = require('.');
+const Panini = require('./lib/panini');
 
 /**
  * Create a cached instance of Panini. The first time this function is called, it will create an instance of Panini and return the stream transform function. On subsequent calls, the cached instance's stream transform function will be returned.
@@ -11,13 +11,13 @@ const create = () => {
 
   /**
    * Compile a Panini project located at `src`.
-   * @param {String} src - Input folder.
+   * @param {String} input - Input folder.
    * @param {Object} [options] - Panini options. These will override any settings in `package.json`.
    * @returns {Object} Stream compile function.
    */
-  return (src, options) => {
+  return (input, options) => {
     if (!panini) {
-      panini = new Panini(src, null, options).panini;
+      panini = new Panini(input, Object.assign({}, options));
       panini.setup();
     }
 
