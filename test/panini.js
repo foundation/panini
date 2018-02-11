@@ -175,7 +175,6 @@ describe('Panini class', () => {
       const panini = new Panini('src');
       const stream = panini.compile(tempDir);
       expect(stream).to.be.a.ReadableStream;
-      expect(stream).to.be.a.WritableStream;
     });
   });
 });
