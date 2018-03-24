@@ -32,11 +32,7 @@ module.exports = class {
    * @returns {Promise} Promise which resolves when building is done, or rejects if there's a fatal error.
    */
   build() {
-    return new Promise((resolve, reject) => {
-      this.panini.compile(this.output)
-        .on('finish', resolve)
-        .on('error', reject);
-    });
+    return this.panini.compile(this.output);
   }
 
   /**

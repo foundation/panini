@@ -21,7 +21,7 @@ const create = () => {
       panini.setup();
     }
 
-    const stream = panini.compile();
+    const stream = panini.compileStream();
     // This lil guy is mostly used for testing, so we can inspect the underlying Panini instance
     stream._panini = panini;
     return stream;

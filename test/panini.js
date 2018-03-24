@@ -5,7 +5,6 @@ const chai = require('chai');
 const chaiStream = require('chai-stream-es6').default;
 const sinon = require('sinon');
 const File = require('vinyl');
-const tempy = require('tempy');
 const PaniniWrapper = require('..');
 const PugEngine = require('../engines/pug');
 
@@ -161,20 +160,6 @@ describe('Panini class', () => {
 
     it('inserts a parsing error for later use', () => {
       expect(p.getPageData(file, {}, 'error')).to.have.property('_paniniError', 'error');
-    });
-  });
-
-  describe('compile()', () => {
-    let tempDir;
-
-    before(() => {
-      tempDir = tempy.directory();
-    });
-
-    it('returns a stream', () => {
-      const panini = new Panini('src');
-      const stream = panini.compile(tempDir);
-      expect(stream).to.be.a.ReadableStream;
     });
   });
 });
