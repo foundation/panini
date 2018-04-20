@@ -5,3 +5,7 @@ node_js:
   - "5"
   - "6"
   - "7"
+before_install:
+  - npm i -g npm@latest
+install:
+  - npm ci
