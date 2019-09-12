@@ -4,7 +4,9 @@
   "description": "A super tiny flat file compiler.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --reporter nyan"
+    "test": "mocha --compilers js:babel-register --reporter nyan",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "ZURB <foundation@zurb.com> (http://zurb.com)",
   "license": "MIT",
@@ -15,15 +17,16 @@
     "deepmerge": "^1.3.2",
     "front-matter": "^2.0.5",
     "glob": "^7.0.0",
-    "handlebars": "^4.0.5",
+    "handlebars": "^4.0.14",
     "highlight.js": "^8.9.1",
-    "js-yaml": "^3.5.2",
-    "marked": "^0.3.14",
+    "js-yaml": "^3.13.1",
+    "marked": "^0.6.2",
     "nopt": "^4.0.1",
     "slash": "^1.0.0",
     "strip-bom": "2.0.0",
     "through2": "^2.0.0",
-    "vinyl-fs": "^2.4.4"
+    "vinyl-fs": "^2.4.4",
+    "snyk": "^1.226.2"
   },
   "devDependencies": {
     "assert-dir-equal": "^1.0.1",
@@ -43,5 +46,6 @@
   },
   "bugs": {
     "url": "https://github.com/zurb/panini/issues"
-  }
+  },
+  "snyk": true
 }
