@@ -22,7 +22,7 @@
     "nopt": "^4.0.1",
     "slash": "^1.0.0",
     "strip-bom": "2.0.0",
-    "through2": "^2.0.0",
+    "through2": "^2.0.5",
     "vinyl-fs": "^2.4.4"
   },
   "devDependencies": {
