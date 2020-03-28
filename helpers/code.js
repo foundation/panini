@@ -14,5 +14,5 @@ module.exports = function(language, options) {
 
   var code = hljs.highlight(language, options.fn(this)).value;
 
-  return format('<div class="code-example"><pre><code class="%s">%s</code></pre></div>', language, code);
+  return format('<div class="code-example"><pre><code class="%s hljs">%s</code></pre></div>', language, code);
 }
