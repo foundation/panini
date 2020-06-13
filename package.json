@@ -39,9 +39,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zurb/panini"
+    "url": "https://github.com/foundation/panini"
   },
   "bugs": {
-    "url": "https://github.com/zurb/panini/issues"
+    "url": "https://github.com/foundation/panini/issues"
   }
 }
