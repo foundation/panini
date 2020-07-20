@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --require babel-core/register"
   },
-  "author": "ZURB <foundation@zurb.com> (http://zurb.com)",
+  "author": "Foundation <contact@get.foundation> (https://get.foundation)",
   "license": "MIT",
   "bin": {
     "panini": "./bin/panini.js"
