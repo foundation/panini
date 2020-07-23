@@ -15,6 +15,8 @@ var marked = require('marked');
    renderer.code = function(code, language) {
      if (typeof language === 'undefined') language = 'html';
 
+     language = hljs.getLanguage(language) ? language : 'html';
+
      var renderedCode = hljs.highlight(language, code).value;
      var output = `<div class="code-example"><pre><code class="${language} hljs">${renderedCode}</code></pre></div>`;
 

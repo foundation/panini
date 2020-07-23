@@ -11,6 +11,7 @@ var hljs = require('highlight.js');
  */
 module.exports = function(language, options) {
   if (typeof language === 'undefined') language = 'html';
+  language = hljs.getLanguage(language) ? language : 'html';
 
   var code = hljs.highlight(language, options.fn(this)).value;
 
