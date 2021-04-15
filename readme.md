@@ -135,6 +135,8 @@ Data can also be a `.js` file with a `module.exports`. The data returned by the 
 
 Data can also be inserted into the page itself with a Front Matter template at the top of the file.
 
+The reserved `path` variable is added to every page. This stores the path to the current page, excluding the filename.
+
 Lastly, the reserved `page` variable is added to every page template as it renders. It contains the name of the page being rendered, without the extension.
 
 ## CLI
