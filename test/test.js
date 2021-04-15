@@ -205,6 +205,24 @@ describe('Panini variables', () => {
       });
   });
 
+  it('{{path}} variable that stores the path to the current page, excluding filename', done => {
+    var p = new Panini({
+      root: FIXTURES + 'variable-path/pages/',
+      layouts: FIXTURES + 'variable-path/layouts/',
+      partials: FIXTURES + 'variable-path/partials/'
+    });
+
+    p.refresh();
+
+    src(FIXTURES + 'variable-path/pages/**/*.html')
+      .pipe(p.render())
+      .pipe(dest(FIXTURES + 'variable-path/build'))
+      .on('finish', () => {
+        equal(FIXTURES + 'variable-path/expected', FIXTURES + 'variable-path/build');
+        done();
+      });
+  });
+
   it('{{layout}} variable that stores the current layout', done => {
     var p = new Panini({
       root: FIXTURES + 'variable-layout/pages/',
