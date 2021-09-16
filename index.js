@@ -20,7 +20,7 @@ module.exports = class {
     this.panini = new Panini(input, options);
 
     if (!this.panini.initialized) {
-      throw new Error();
+      throw new Error('Panini was not initialized properly.');
     }
 
     this.panini.setup();
