@@ -18,7 +18,7 @@
     "handlebars": "^4.0.5",
     "highlight.js": "^8.9.1",
     "js-yaml": "^3.14.0",
-    "marked": "^2",
+    "marked": "^4",
     "nopt": "^4.0.1",
     "slash": "^1.0.0",
     "strip-bom": "2.0.0",
