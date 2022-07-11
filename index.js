@@ -1,5 +1,6 @@
 var panini;
 var help = require('./lib/helpMessage');
+var Handlebars = require('handlebars');
 
 /**
  * Initializes an instance of Panini.
@@ -8,7 +9,7 @@ var help = require('./lib/helpMessage');
  */
 function Panini(options) {
   this.options = options;
-  this.Handlebars = require('handlebars');
+  this.Handlebars = Handlebars;
   this.layouts = {};
   this.data = {};
 
@@ -47,6 +48,7 @@ module.exports = function(options) {
 }
 
 module.exports.Panini = Panini;
+module.exports.Handlebars = Handlebars;
 module.exports.refresh = function() {}
 module.exports.help = function() {
   help();
