@@ -166,3 +166,8 @@ npm install
 ```
 
 Use `npm test` to run tests.
+
+## Useful Plugins
+
+**Localization**
+* [gulp-html-i18n](https://github.com/webyom/gulp-html-i18n): Internationalize your HTML files with gulp!
