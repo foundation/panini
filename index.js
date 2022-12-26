@@ -53,3 +53,6 @@ module.exports.refresh = function() {}
 module.exports.help = function() {
   help();
 }
+module.exports.reset = function() {
+  panini = undefined;
+};
